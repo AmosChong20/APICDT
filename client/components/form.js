@@ -26,6 +26,7 @@ function Form({ information }) {
     const [schoolNameEN, setSchoolNameEN] = useState()
     const [leaderNameCN, setLeaderNameCN] = useState()
     const [leaderNameEN, setLeaderNameEN] = useState()
+    const [areaCode, setAreaCode] = useState()
     const [topic1, setTopic1] = useState()
     const [topic2, setTopic2] = useState()
     const [leaderEmail, setLeaderEmail] = useState()
@@ -40,8 +41,8 @@ function Form({ information }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        if (!schoolNameCN || !schoolNameEN || !leaderEmail || !leaderNameCN || !leaderNameEN || !leaderPhone || !topic1 || !topic2) {
-            console.log(schoolNameCN,schoolNameEN,leaderEmail,leaderNameCN, leaderPhone, topic1, topic2)
+        if (!schoolNameCN || !schoolNameEN || !leaderEmail || !leaderNameCN || !leaderNameEN || !leaderPhone || !topic1 || !topic2 || !areaCode) {
+            console.log(schoolNameCN,schoolNameEN,leaderEmail,leaderNameCN, leaderPhone, topic1, topic2, areaCode+leaderPhone)
             setShowFailAlert(true)
             setTimeout(() => {
                 setShowFailAlert(false)
@@ -61,6 +62,7 @@ function Form({ information }) {
         if (data.data.length > 0) {
             setShowRepeatAlert(true)
             setLeaderEmail("")
+            setAreaCode("")
             setLeaderNameCN("")
             setLeaderNameEN("")
             setLeaderPhone("")
@@ -103,7 +105,7 @@ function Form({ information }) {
                     topic1: topic1,
                     topic2: topic2,
                     leaderEmail: leaderEmail,
-                    leaderPhone: leaderPhone
+                    leaderPhone: areaCode + leaderPhone
                 }
             }),
             headers: {
@@ -167,10 +169,10 @@ function Form({ information }) {
                                 <Input fontSize={'18px'} focusBorderColor='white' borderColor={'white'} w='320px' value={leaderNameEN} onChange={(e) => setLeaderNameEN(e.target.value)} placeholder='Name of Team Leader' type='text' isRequired />
                             </Flex>
                             <Flex flexDir={'row'}>
-                                <Select borderColor={'white'} w='150px' placeholder='国际电话区号'>
+                                <Select borderColor={'white'} w='150px' placeholder='国际电话区号' onChange={(e) => setAreaCode(e.target.value)}>
                                     {Countries.map(country => {
                                         return (
-                                            <option key={country.id}>{country}</option>
+                                            <option key={country.id} value={country}>{country}</option>
                                         )
                                     })}
                                 </Select>

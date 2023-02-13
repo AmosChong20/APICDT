@@ -16,7 +16,7 @@ export default function Timelines(){
   const { events } = event
   return (
     <div className={styles.body} >
-      < Container maxW='4xl' centerContent >
+      < Container maxW='100vw' centerContent >
             <Flex >
                 <Text className={styles.text}  fontFamily= {"ZCOOL XiaoWei"} align='center'>
                     辩处事之道，论经世之心；探人间至理，寻生活本真<br/>
@@ -41,7 +41,7 @@ export default function Timelines(){
               dateClassName={styles.date}
               iconStyle = {{background: 'rgba(18, 18, 18, 0.85)', boxShadow:"none"}}
               key={event.id}>
-              <Flex fontFamily={"ZCOOL XiaoWei"}  fontSize={25} letterSpacing='0.37em' justify='center' color='#dedede'>{event.event}</Flex>
+              <Flex fontFamily={"ZCOOL XiaoWei"}  fontSize={'24px'} letterSpacing='0.37em' justify='center' color='#dedede'>{event.event}</Flex>
               </VerticalTimelineElement>
 )} )}
     </VerticalTimeline>
