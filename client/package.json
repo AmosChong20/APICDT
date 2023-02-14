@@ -20,6 +20,7 @@
     "@fontsource/zcool-qingke-huangyou": "^4.5.12",
     "@fontsource/zcool-xiaowei": "^4.5.12",
     "@next/font": "^13.0.6",
+    "@vercel/analytics": "^0.1.8",
     "antd": "^5.1.5",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
