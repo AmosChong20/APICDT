@@ -1,5 +1,5 @@
-import { Box, Button, Card, CardBody, Flex, Heading } from "@chakra-ui/react";
-import Buttons from "./Button";
+import { Box, Button, Flex, Heading } from "@chakra-ui/react";
+// import Buttons from "./Button";
 import AlertDialog from "./alert";
 import "@fontsource/zcool-xiaowei"
 import { useRouter } from "next/router";

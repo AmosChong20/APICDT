@@ -1,5 +1,5 @@
 import { Button, Flex, Heading, Select } from "@chakra-ui/react";
-import contestant from '../public/debate.json'
+import contestant from '../public/data/debate.json'
 import "@fontsource/zcool-xiaowei"
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -23,7 +23,6 @@ function GradeBestCand({ resultsID }) {
             })
         })
         router.replace(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/gradeSummary/${resultsID}`)
-        // router.replace(`http://apicdt.vercel.app/gradeSummary/1`)
     }
 
     return ( 

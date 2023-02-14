@@ -1,4 +1,4 @@
-import { LinkBox, LinkOverlay, Card, CardHeader, CardBody, Text, Heading, CardFooter, Box, Flex } from '@chakra-ui/react'
+import { LinkBox, Card, CardBody, Text, Heading, Box, Flex } from '@chakra-ui/react'
 import { Button } from "@chakra-ui/react"
 import { EditIcon,DeleteIcon, A } from "@chakra-ui/icons";
 import Link from 'next/link'
@@ -18,8 +18,6 @@ function MatchCard({ aTopic, bTopic, id, matchType, teamA, teamB, matchTime }) {
             setRole(session.user.role)
         }
     }, [session, status])
-    // const date = new Date(matchTime).toLocaleDateString('en-SG')
-    // const time = new Date(matchTime).toLocaleTimeString('en-SG')
     return (
     <Box>
             {role === 'Judge' ? <LinkBox align='center' justify='center' w={'75vw'}>

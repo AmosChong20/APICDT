@@ -1,9 +1,8 @@
-import { Box, Button, Card, CardBody, Flex, Heading } from "@chakra-ui/react";
+import { Button, Flex, Heading } from "@chakra-ui/react";
 import {
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
@@ -17,7 +16,7 @@ import {
     NumberIncrementStepper,
     NumberDecrementStepper,
   } from '@chakra-ui/react'
-import Buttons from "./Button";
+// import Buttons from "./Button";
 import "@fontsource/zcool-xiaowei"
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -118,8 +117,6 @@ function GradeTable({ teamA, teamB, judgeName }) {
         const { data } = res
         const id = data[0].id
         router.replace(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/gradeImpression/${id}`)
-        // router.replace(`http://localhost:3000/gradeImpression/1`)
-        // router.replace(`http://apicdt.vercel.app/gradeImpression/1`)
     }
     return (
         < Flex mt = { 20} fontFamily = { 'ZCOOL XiaoWei'} align = { 'center'} flexDir = { 'column'} >

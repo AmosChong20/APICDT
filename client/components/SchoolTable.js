@@ -1,18 +1,16 @@
-import { Box, Button, Card, CardBody, Flex, Heading } from "@chakra-ui/react";
 import {
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
-    TableCaption,
     TableContainer,
 } from '@chakra-ui/react'
-import group1 from '../public/group.json'
+import group1 from '../public/data/group.json'
 import { Select } from '@chakra-ui/react'
 import "@fontsource/zcool-xiaowei"
+
 function SchoolTable({leaderEmail,drawn_result,schoolNameEN,leaderNameEN,leaderNameCN,leaderPhone,schoolNameCN,topic1,topic2,group,point}){
     const { Groups } = group1
     return (

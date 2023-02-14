@@ -9,7 +9,6 @@ import {
   useDisclosure,
   Button,
   AlertDialogCloseButton,
-  isCentered
   } from '@chakra-ui/react'
 
 

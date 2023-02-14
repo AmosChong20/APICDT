@@ -5,7 +5,7 @@ import { authOptions } from "./api/auth/[...nextauth]";
 import { useRouter } from "next/router";
 import { DatePicker } from 'antd';
 import AlertDialog from "../components/alert";
-import match from '../public/matchType.json'
+import match from '../public/data/matchType.json'
 import "@fontsource/ma-shan-zheng"
 import moment from "moment";
 import Head from 'next/head'

@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardBody, CardFooter, Stack, Heading, Text, Divider, ButtonGroup, Button } from '@chakra-ui/react'
 import Image from 'next/image'
 import "@fontsource/zcool-xiaowei"
-import committee from "../public/committees.json"
+import committee from "../public/data/committees.json"
 
 function CommitteeCard({ index, name, position }) {
     const { data } = committee

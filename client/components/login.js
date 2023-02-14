@@ -1,11 +1,9 @@
 import { FormLabel, FormControl, CardBody, Heading, Stack, Card, Avatar, Input, Button, Box, Flex } from "@chakra-ui/react";
 import '@fontsource/ma-shan-zheng'
 import { signIn } from "next-auth/react";
-import { Router } from "next/router";
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import "@fontsource/zcool-xiaowei"
-import { getSession } from "next-auth/react";
 import AlertDialog from "./alert";
 
 function Login() {
@@ -22,10 +20,6 @@ function Login() {
             password: password,
             callbackUrl: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}`
         })
-
-        // const getRole = await getRoles()
-        // console.log(role)
-        console.log(res)
 
         if (res?.error) {
             setShowFailAlert(true)

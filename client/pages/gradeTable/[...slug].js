@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { Flex, Heading } from "@chakra-ui/react";
 import "@fontsource/zcool-xiaowei"
 import GradeTable from "../../components/gradeTable";

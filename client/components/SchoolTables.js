@@ -1,24 +1,22 @@
-import { Box, Flex, Heading ,Text,Container, Grid, GridItem,Button, space} from '@chakra-ui/react'
+import { Flex, Heading ,Container, Button } from '@chakra-ui/react'
 import "@fontsource/ma-shan-zheng"
 import Schools from "./SchoolTable";
 import {
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
-    TableCaption,
     TableContainer,
     Stack,
     Select
   } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import group1 from '../public/GroupsNew.json'
-import { Row } from 'antd';
+import { useState } from 'react'
+import group1 from '../public/data/GroupsNew.json'
 import "@fontsource/zcool-xiaowei"
+
 function SchoolTables({ schools }) {
     const { Groups } = group1
     const router = useRouter()

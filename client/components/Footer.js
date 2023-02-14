@@ -1,18 +1,16 @@
 import {
-  Button,
   ButtonGroup,
   Container,
   Divider,
   IconButton,
   Stack,
   Text,
-  Box,
   Flex,
   Image,
   Link
 } from '@chakra-ui/react'
 import * as React from 'react'
-import { FaFacebook, FaGithub, FaInstagram, FaLinkedin, FaTwitter, FaWeibo} from 'react-icons/fa'
+import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa'
 import "@fontsource/zcool-xiaowei"
 import styles from '../styles/footer.module.css'
 

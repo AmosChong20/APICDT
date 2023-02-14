@@ -2,21 +2,18 @@ import {
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
-    TableCaption,
     TableContainer,
     Box,
     Text,
 } from '@chakra-ui/react'
 import "@fontsource/zcool-xiaowei"
 import styles from '../styles/topic.module.css'
-import match from '../public/matchType.json'
+import match from '../public/data/matchType.json'
 
 function Topic({ topics }) {
-    // const { topics } = topic
     const { matchTypes } = match
     return ( 
         <Box fontFamily={"ZCOOL XiaoWei"} pt={20} pb={20} pl={20} className={styles.body} color="#fcffea">

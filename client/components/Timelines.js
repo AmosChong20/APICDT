@@ -2,12 +2,10 @@ import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timel
 import 'react-vertical-timeline-component/style.min.css';
 import React from "react";
 
-import event from '../public/events.json'
+import event from '../public/data/events.json'
 import {
   Flex,
-  Card,
   Text,
-  Box,
   Container
 } from '@chakra-ui/react'
 import "@fontsource/zcool-xiaowei"

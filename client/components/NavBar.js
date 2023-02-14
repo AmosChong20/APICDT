@@ -113,16 +113,6 @@ function NavBar() {
                   </Flex>
             )))
             }
-      {/* {session  &&
-            <Flex align={'center'} justify='space-between' h='100%' pr={5} fontSize={'18px'}>
-
-          <Link href="/matches" passHref>
-        <Flex ml={5} _hover={{color: 'white'}}>比赛信息</Flex>
-          </Link>
-
-          <Flex ml={5} _hover={{ color: 'white', cursor: 'pointer' }} onClick={handleSignOut}>登出</Flex>
-          </Flex>
-          } */}
     </Flex>
     
     )

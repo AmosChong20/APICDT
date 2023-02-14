@@ -3,9 +3,7 @@ import {
     AlertIcon,
     AlertTitle,
     AlertDescription,
-    Box,
     Flex,
-    Center
   } from '@chakra-ui/react'
 
 function AlertDialog({ status, description }) {

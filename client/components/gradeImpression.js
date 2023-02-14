@@ -1,5 +1,5 @@
-import { Box, Button, Card, CardBody, Flex, Heading } from "@chakra-ui/react";
-import Buttons from "./Button";
+import { Button, Flex, Heading } from "@chakra-ui/react";
+// import Buttons from "./Button";
 import "@fontsource/zcool-xiaowei"
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -39,7 +39,6 @@ function GradeImpression({ resultsID }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        // router.replace(`http://apicdt.vercel.app/gradeBestCand/1`)
         router.replace(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/gradeBestCand/${resultsID}`)
         const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}results/${resultsID}`, {
             method: 'PUT',

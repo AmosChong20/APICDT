@@ -33,10 +33,6 @@ function Announcement({ announcement }) {
                                         : <Heading fontFamily={'Ma Shan Zheng'}>最新消息</Heading>}
             <Box align='center' mt={10} width='100%' >
                 {announcement.map((ann) => {
-                    // useEffect(() => {
-                    //     const date = new Date(ann.attributes.publishedAt).toLocaleDateString()
-                    //     const time = new Date(ann.attributes.publishedAt).toLocaleTimeString()
-                    // }, [])
                     return (
                         <Flex justify='center' align='center' key={ann.id}>
                         <Card  align='center'  boxShadow='xl' width='80%' mt={10} mr={10} mb={30} className={styles.announcement} key={ann.id}>
@@ -45,7 +41,6 @@ function Announcement({ announcement }) {
                         <br /> 
                         <Text color='#dedede' >{`${ann.attributes.description} `}</Text>
                                 <Text color='#dedede' >{` ${moment(ann.attributes.publishedAt).format('YYYY-MM-DD')} ${moment(ann.attributes.publishedAt).format('hh:mma')}`}</Text>
-                                {/* <Text color='#dedede' >{` ${ann.attributes.publishedAt}`}</Text> */}
                         </CardBody>
                         </Card>
                             {role === 'Committee' ?

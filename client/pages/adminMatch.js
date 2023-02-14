@@ -1,4 +1,3 @@
-import { useSession } from "next-auth/react";
 import { unstable_getServerSession } from "next-auth";
 import Announcement from "../components/announcement";
 import { useRouter } from "next/router";

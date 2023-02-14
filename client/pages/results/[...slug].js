@@ -1,9 +1,8 @@
-import { Flex, Heading, Text, Divider, Box } from "@chakra-ui/react";
+import { Flex, Heading, Box } from "@chakra-ui/react";
 import {
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
@@ -12,12 +11,10 @@ import {
 } from '@chakra-ui/react'
 import "@fontsource/zcool-xiaowei"
 import "@fontsource/ma-shan-zheng"
-import result from '../../public/results.json'
 import Head from 'next/head'
 
 function results({ results }) {
     const { data } = results
-    // const { data } = result
   return (
     <>
     <Head>

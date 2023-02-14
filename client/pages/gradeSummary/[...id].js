@@ -1,6 +1,5 @@
-import { useRouter } from "next/router";
 import GradeSummary from "../../components/gradeSummary";
-import { Flex, Heading } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import "@fontsource/zcool-xiaowei"
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";

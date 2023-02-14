@@ -9,7 +9,7 @@ import {
     Button,
     Stack
 } from '@chakra-ui/react'
-import country from '../public/country.json'
+import country from '../public/data/country.json'
 import AlertDialog from './alert';
 import "@fontsource/inder";
 import "@fontsource/zcool-xiaowei"
