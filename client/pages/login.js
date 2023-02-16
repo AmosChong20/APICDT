@@ -2,6 +2,7 @@ import Login from "../components/login";
 import { Flex } from '@chakra-ui/react'
 import styles from '../styles/login.module.css'
 import Head from 'next/head'
+import Image from "next/image";
 
 function LoginPage() {
     return (
@@ -12,7 +13,8 @@ function LoginPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-        <Flex justify='center' align={'center'} className={styles.body} pb={10}>
+        <Flex justify='center' align={'center'} pb={10} position={'relative'} h='92vh'>
+          <Image src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
             <Login />
             </Flex>
             </>

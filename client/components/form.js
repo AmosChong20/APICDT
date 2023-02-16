@@ -7,9 +7,13 @@ import {
     Box,
     Heading,
     Button,
-    Stack
+    Stack,
+    Alert,
+    AlertIcon,
+    AlertTitle
 } from '@chakra-ui/react'
 import country from '../public/data/country.json'
+import Image from 'next/image';
 import AlertDialog from './alert';
 import "@fontsource/inder";
 import "@fontsource/zcool-xiaowei"
@@ -42,7 +46,7 @@ function Form({ information }) {
         e.preventDefault()
 
         if (!schoolNameCN || !schoolNameEN || !leaderEmail || !leaderNameCN || !leaderNameEN || !leaderPhone || !topic1 || !topic2 || !areaCode) {
-            console.log(schoolNameCN,schoolNameEN,leaderEmail,leaderNameCN, leaderPhone, topic1, topic2, areaCode+leaderPhone)
+            console.log(schoolNameCN, schoolNameEN, leaderEmail, leaderNameCN, leaderPhone, topic1, topic2, areaCode + leaderPhone)
             setShowFailAlert(true)
             setTimeout(() => {
                 setShowFailAlert(false)
@@ -147,12 +151,25 @@ function Form({ information }) {
     }
 
     return (
-        <Box className={styles.body} pt={"50px"} pl={100} fontFamily={"ZCOOL XiaoWei"} color="#fcffea">
-            <Heading fontSize='60px' fontFamily={"ZCOOL XiaoWei"} mb={10}>Registration / 报名</Heading>
+        <Box pt={"50px"} pl={'75px'} fontFamily={"ZCOOL XiaoWei"} color="#fcffea" position={'relative'}>
             {!submitted &&
                 <div>
-                    {showFailAlert ? <AlertDialog status={'error'} description={`信息不完整！`} /> : <Box></Box>}
-                    {showRepeatAlert ? <AlertDialog status={'error'} description={`此邮箱已有账户！`} /> : <Box></Box>}
+                    <Image src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
+            <Stack  pb={10}>
+            <Heading fontSize='60px' fontFamily={"ZCOOL XiaoWei"} className={styles.body}>Registration / 报名</Heading>
+                        {showFailAlert ?
+                            <Flex justify={'center'}>
+                        <Alert status='error' color={'black'} w={'50vw'} position='absolute'>
+                        <AlertIcon />
+                        <AlertTitle>信息不完整！</AlertTitle>
+                                </Alert>
+                                </Flex>: <Box></Box>}
+                    {showRepeatAlert ? <Flex justify={'center'}>
+                        <Alert status='error' color={'black'} w={'50vw'} position='absolute'>
+                        <AlertIcon />
+                        <AlertTitle>此邮箱已有账户！</AlertTitle>
+                                </Alert>
+                                </Flex>: <Box></Box>}
                     <FormControl>
             
                         <Stack mt={10} mb={10}>
@@ -188,19 +205,45 @@ function Form({ information }) {
                             </Flex>
                         </Stack>
                     </FormControl>
-                    <Button fontSize={'20'} type='submit' p={6} mb={10} colorScheme={'whiteAlpha'} onClick={handleSubmit}>报名</Button>
+                        <Button fontSize={'20'} type='submit' p={6} w={'6.5vw'} colorScheme={'whiteAlpha'} onClick={handleSubmit}>报名</Button>
+                        </Stack>
                 </div>}
             {submitted &&
                 <Box h={'92vh'}>
-                    {showAlert ? <AlertDialog status={'success'} description={`恭喜你！报名成功`} /> : <Box></Box>}
-                    {showEmailAlert ? <AlertDialog status={'error'} description={`电邮地址格式不正确！`} /> : <Box></Box>}
-                    <FormControl mt={"80px"} mb={10}>
+                    <Image src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
+                    <Flex pb={10} flexDir={'column'}>
+                    <Heading fontSize='60px' fontFamily={"ZCOOL XiaoWei"} className={styles.body}>Account Registration / 注册户口</Heading>
+                    {showAlert ? <Flex justify={'center'}>
+                        <Alert status='success' color={'black'} w={'50vw'} position='absolute'>
+                        <AlertIcon />
+                        <AlertTitle>恭喜你！报名成功！</AlertTitle>
+                                </Alert>
+                        </Flex> : <Box></Box>}
+                        {showFailAlert ?
+                            <Flex justify={'center'}>
+                        <Alert status='error' color={'black'} w={'50vw'} position='absolute'>
+                        <AlertIcon />
+                        <AlertTitle>信息不完整！</AlertTitle>
+                                </Alert>
+                                </Flex>: <Box></Box>}
+                        {showEmailAlert ? 
+                    <Flex justify={'center'}>
+                    <Alert status='error' color={'black'} w={'50vw'} position='absolute'>
+                    <AlertIcon />
+                    <AlertTitle>电邮地址格式不正确！</AlertTitle>
+                            </Alert>
+                            </Flex> : <Box></Box>}
+                        <FormControl mt={"80px"} mb={10}>
                         <FormLabel fontSize={'26px'}>Password / 密码</FormLabel>
                         <Input  fontSize={'18px'}placeholder='密码' value={password} type='password' focusBorderColor='white' borderColor={'white'} w='320px' onChange={(e) => setPassword(e.target.value)} isRequired/>
-                    </FormControl>
-                    <Button mt={5} p={6} fontSize={'20'} colorScheme={'whiteAlpha'} type='submit' onClick={handlePasswordSubmit}>提交</Button>
-                    <Button ml={5} mt={5} p={6} fontSize={'20'} colorScheme={'whiteAlpha'} type='submit' onClick={handleBackSubmit}>返回</Button>
+                        </FormControl>
+                        <Flex mt='80px'>
+                    <Button p={6} w='6.5vw' fontSize={'20'} colorScheme={'whiteAlpha'} type='submit' onClick={handlePasswordSubmit}>提交</Button>
+                    <Button ml={5} p={6} w='6.5vw' fontSize={'20'} colorScheme={'whiteAlpha'} type='submit' onClick={handleBackSubmit}>返回</Button>    
+                    </Flex>
+                    </Flex>
                 </Box>}
+                    
         </Box>
     )
 }

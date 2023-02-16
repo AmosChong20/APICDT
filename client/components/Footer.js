@@ -10,7 +10,7 @@ import {
   Link
 } from '@chakra-ui/react'
 import * as React from 'react'
-import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa'
+import { FaFacebook, FaInstagram, FaYoutube, FaWeibo } from 'react-icons/fa'
 import "@fontsource/zcool-xiaowei"
 import styles from '../styles/footer.module.css'
 
@@ -41,7 +41,7 @@ export default function Footer() {
             <Text letterSpacing={4} fontSize={20} fontFamily= {"ZCOOL XiaoWei" }  textColor="rgba(252, 255, 234,0.918)"  >C210074@e.ntu.edu.sg</Text>
             </Stack>
           </Stack>
-          <Stack spacing="2" minW="36" flex="1">
+          {/* <Stack spacing="2" minW="36" flex="1">
           <Text paddingLeft={7} mb={30} fontSize={40} fontFamily= {"ZCOOL XiaoWei"} textColor="rgba(252, 255, 234,0.918)" letterSpacing={4}>合作伙伴 </Text>
             <Stack spacing="2" shouldWrapChildren>
               <Text mb={30} fontSize={20} fontFamily= {"ZCOOL XiaoWei"} textColor="rgba(252, 255, 234,0.918)">ntu</Text>
@@ -52,50 +52,58 @@ export default function Footer() {
             <Stack spacing="2" shouldWrapChildren>
               <Text mb={30} fontSize={20} fontFamily= {"ZCOOL XiaoWei"} textColor="white">ntu</Text>
             </Stack>
-          </Stack>
+          </Stack> */}
         </Stack>
         </Stack>
         <Stack>
         <Stack spacing="-2" minW="36" flex="1">
   
         <Text letterSpacing={4}  mb={30} fontSize={40} fontFamily= {"ZCOOL XiaoWei"}  textColor="rgba(252, 255, 234,0.918)">关注我们
-        </Text>
-        <div>
+                </Text>
+                <ButtonGroup variant="ghost">
+
+        <IconButton color ='white' target="_blank" as="a" href="https://www.facebook.com/NTUCSapchinesedebate/" aria-label="Facebook" icon={<FaFacebook fontSize="1.25rem" />} />
+                  <IconButton color='white' target="_blank" as="a" href="https://www.instagram.com/apchinesedebate" aria-label="Instagram" icon={<FaInstagram fontSize="1.25rem" />} />
+                  <IconButton color='white' target="_blank" as="a" href="https://www.instagram.com/apchinesedebate" aria-label="Youtube" icon={<FaYoutube fontSize="1.25rem" />} />
+                  <IconButton color ='white'  target="_blank" as="a" href="https://www.instagram.com/apchinesedebate" aria-label="Weibo" icon={<FaWeibo fontSize="1.25rem" />} />
+      </ButtonGroup>
+        {/* <div>
         <Stack  direction='column' spacing="2.5" >
         <ul >
         <Stack  direction='row' spacing="2.5" shouldWrapChildren>
-          <Link target="_blank"  href = "https://www.instagram.com/apchinesedebate/" >
-        <Image   borderRadius='full' boxSize='50px' src= 'Ins.svg.webp' alt='Instagram'/>
+                        <Link target="_blank" href="https://www.instagram.com/apchinesedebate/" >
+                       <IconButton color ='white' as="a" href="#" aria-label="Twitter" icon={<FaInstagram fontSize="1.25rem" />} />
+          <Image borderRadius='full' boxSize='50px' src={require('../public/logo/Ins.svg.webp')} alt='Instagram'/> 
         </Link>
         <Link target="_blank"  href = "https://www.instagram.com/apchinesedebate" >
-          <Image   borderRadius='full' boxSize='50px' src= 'Xiaohongshu.png' alt='Xiaohongshu'/>
+        <Image borderRadius='full' boxSize='50px' src={require('../public/logo/Xiaohongshu.png')} alt='Xiaohongshu'/>
         </Link>
         <Link target="_blank"  href = "https://www.facebook.com/NTUCSapchinesedebate/" >
-          <Image   borderRadius='full' boxSize='50px' src= 'facebook.svg' alt='Facebook'/>
+          <Image borderRadius='full' boxSize='50px' src={require('../public/logo/facebook.svg')} alt='Facebook'/>
         </Link>
         <Link target="_blank"  href = "https://www.facebook.com/NTUCSapchinesedebate/" >
-          <Image  bg='white' borderRadius='full' boxSize='50px' src= 'sina-weibo.svg' alt='Weibo'/>
+          <Image bg='white' borderRadius='full' boxSize='50px' src={require('../public/logo/sina-weibo.svg')} alt='Weibo'/>
         </Link>
         </Stack>
         </ul> 
         <ul >
         <Stack  direction='row' spacing="2.5" shouldWrapChildren>
           <Link target="_blank"  href = "https://weibo.com/u/5398940329" >
-        <Image   borderRadius='full' boxSize='50px' src= 'wechat.png' alt='Wechat'/>
+        <Image   borderRadius='full' boxSize='50px' src={require('../public/logo/wechat.png')} alt='Wechat'/>
         </Link>
         <Link target="_blank"  href = "https://weibo.com/u/5398940329" >
-          <Image   borderRadius='full' boxSize='50px' src= 'bilibili.png' alt='Xiaohongshu'/>
+        <Image borderRadius='full' boxSize='50px' src={require('../public/logo/bilibili.png')} alt='Xiaohongshu'/>
         </Link>
         <Link target="_blank"  href = "https://www.facebook.com/NTUCSapchinesedebate/" >
-          <Image   borderRadius='full' boxSize='50px' src= 'facebook.svg' alt='Facebook'/>
+        <Image borderRadius='full' boxSize='50px' src={require('../public/logo/facebook.svg')} alt='Facebook'/>
         </Link>
         <Link target="_blank"  href = "https://www.facebook.com/NTUCSapchinesedebate/" >
-          <Image  bg='white' borderRadius='full' boxSize='50px' src= 'sina-weibo.svg' alt='Weibo'/>
+          <Image bg='white' borderRadius='full' boxSize='50px' src={require('../public/logo/sina-weibo.svg')} alt='Weibo'/>
         </Link>
         </Stack>
         </ul> 
         </Stack>
-        </div>
+        </div> */}
         </Stack>
 
         </Stack>
@@ -115,7 +123,7 @@ export default function Footer() {
       &copy; {new Date().getFullYear()} Nanyang Technological University, Inc. All rights reserved.
       </Text>
       <ButtonGroup variant="ghost">
-        <IconButton color ='white' as="a" href="#" aria-label="Twitter" icon={<FaTwitter fontSize="1.25rem" />} />
+
         <IconButton color ='white' as="a" href="#" aria-label="Facebook" icon={<FaFacebook fontSize="1.25rem" />} />
         <IconButton color ='white'  target="_blank" as="a" href="https://www.instagram.com/apchinesedebate" aria-label="Instagram" icon={<FaInstagram fontSize="1.25rem" />} />
       </ButtonGroup>

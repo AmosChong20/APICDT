@@ -8,19 +8,23 @@ import {
     TableContainer,
     Box,
     Text,
+    Flex,
 } from '@chakra-ui/react'
 import "@fontsource/zcool-xiaowei"
 import styles from '../styles/topic.module.css'
 import match from '../public/data/matchType.json'
+import Image from 'next/image'
 
 function Topic({ topics }) {
     const { matchTypes } = match
     return ( 
-        <Box fontFamily={"ZCOOL XiaoWei"} pt={20} pb={20} pl={20} className={styles.body} color="#fcffea">
-            <Text mb={30} fontSize={48} >辩题列表</Text>
+        <Box fontFamily={"ZCOOL XiaoWei"} pt={'50px'} pb={'50px'} pl={'75px'} color="#fcffea" position={'relative'}>
+            <Image src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
+            <Flex flexDir={'column'} className={styles.body}>
+            <Text mb={30} fontSize={48} className={styles.body}>辩题列表</Text>
             {topics ? matchTypes.map((matchType) => {
                 return (
-                    <TableContainer width={'60vw'} borderColor='purple' mb={'10'} key={matchType.id}>
+                    <TableContainer width={'60vw'} borderColor='purple' mb={'10'} key={matchType.id} className={styles.body} >
                         <Table variant='striped' colorScheme='whiteAlpha' borderColor={'black'}>
                             <Thead>
                                 <Tr>
@@ -42,8 +46,8 @@ function Topic({ topics }) {
                         </Table>
                     </TableContainer>
                 )
-
-            }) :<Box></Box>}
+            }) : <Box ></Box>}
+                 </Flex>
             </Box>
      );
 }

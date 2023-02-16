@@ -1,6 +1,7 @@
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import React from "react";
+import Image from 'next/image';
 
 import event from '../public/data/events.json'
 import {
@@ -13,9 +14,10 @@ import styles from '../styles/Timelines.module.css'
 export default function Timelines(){
   const { events } = event
   return (
-    <div className={styles.body} >
-      < Container maxW='100vw' centerContent >
-            <Flex >
+    < div >
+      < Container maxW='100vw' centerContent position={'relative'}>
+      <Image src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
+            <Flex className={styles.body}>
                 <Text className={styles.text}  fontFamily= {"ZCOOL XiaoWei"} align='center'>
                     辩处事之道，论经世之心；探人间至理，寻生活本真<br/>
                     人文荟萃，尽显大家风采；舌灿莲花，不负才俊风流<br/>
@@ -23,7 +25,6 @@ export default function Timelines(){
             第十一届亚太大专华语辩论赛，静候君来。
                 </Text >
             </Flex>
-            </Container>
             <Text className={styles.header} fontFamily= {"ZCOOL XiaoWei"} fontWeight={'50'} color='#dedede'>
                     比赛行程<br/>
             </Text >
@@ -42,7 +43,8 @@ export default function Timelines(){
               <Flex fontFamily={"ZCOOL XiaoWei"}  fontSize={'24px'} letterSpacing='0.37em' justify='center' color='#dedede'>{event.event}</Flex>
               </VerticalTimelineElement>
 )} )}
-    </VerticalTimeline>
+        </VerticalTimeline>
+        </Container>
     </div>
   );
 }

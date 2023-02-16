@@ -1,4 +1,8 @@
 .header {
-  background-image: url("../public/logo/banner.png");
+  z-index: 1;
   letter-spacing: 1em;
+}
+
+.image {
+  z-index: 0;
 }

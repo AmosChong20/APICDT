@@ -1,8 +1,14 @@
 
 .body { 
-  background-image: url("../public/logo/long-banner.png");
+  z-index: 1;
 
 }
+
+.image {
+  z-index: 0;
+  object-fit: cover;
+}
+
 .text{
   text-align: center;
   padding-top: 12%;
@@ -10,6 +16,7 @@
 	color: white;
 	font-size: 1.83vw;
   letter-spacing: 0.3em;
+  z-index: 1;
 }
 .header{
   text-align:center;
@@ -18,10 +25,12 @@
 	color: white;
 	font-size: 3vw;
   letter-spacing: 0.4em;
+  z-index: 1;
 }
 .date{
   font-family: 'ZCOOL XiaoWei';
   color:white;
+  z-index: 1;
 }
 .bottom{
   border-color: black;

@@ -1,3 +1,8 @@
+.image {
+  z-index: 0;
+  object-fit: cover;
+}
+
 .body {
-  background-image: url("../public/logo/long-banner.png");
+  z-index: 2;
 }

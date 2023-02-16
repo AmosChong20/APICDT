@@ -1,3 +1,12 @@
 .body {
-  background-image: url("../public/logo/long-banner.png");
+  z-index: 1
+}
+
+.image {
+  z-index: 0;
+  object-fit: cover;
+}
+
+.alert {
+  position: fixed;
 }
