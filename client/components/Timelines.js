@@ -16,7 +16,7 @@ export default function Timelines(){
   return (
     < div >
       < Container maxW='100vw' centerContent position={'relative'}>
-      <Image src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
+      <Image alt='apicdt-background' src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
             <Flex className={styles.body}>
                 <Text className={styles.text}  fontFamily= {"ZCOOL XiaoWei"} align='center'>
                     辩处事之道，论经世之心；探人间至理，寻生活本真<br/>

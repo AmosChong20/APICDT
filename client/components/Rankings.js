@@ -12,7 +12,7 @@ function Rankings({ ranking }) {
    
     return ( 
         <Flex align={'center'} justify={'center'} w="100vw" flexDir={'column'} position={'relative'}>
-            <Image src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
+            <Image alt='apicdt-background' src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
             <Text align="center" fontSize='6xl' letterSpacing={3} className={styles.body} padding={5} fontFamily= {'Ma Shan Zheng'} color={'white'}>积分榜</Text>
         <Grid templateColumns='repeat(2, 1fr)' w='80vw' className={styles.body} align='center'>
             {Groups.map((group) => {

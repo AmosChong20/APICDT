@@ -19,7 +19,7 @@ function About() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
             <Box fontFamily={"ZCOOL XiaoWei"} p={20} position={'relative'}>
-                <Image src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
+                <Image alt='apicdt-background' src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
                 <Flex className={styles.body} flexDir={'column'}>
             <Heading fontFamily={"ZCOOL XiaoWei"} fontSize={72} color="#fcffea" className={styles.body}>关于我们</Heading>
             <Text pt={10} fontSize={60} color="#fafafa" className={styles.body}>历史</Text>

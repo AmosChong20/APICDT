@@ -154,7 +154,7 @@ function Form({ information }) {
         <Box pt={"50px"} pl={'75px'} fontFamily={"ZCOOL XiaoWei"} color="#fcffea" position={'relative'}>
             {!submitted &&
                 <div>
-                    <Image src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
+                    <Image alt='apicdt-background' src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
             <Stack  pb={10}>
             <Heading fontSize='60px' fontFamily={"ZCOOL XiaoWei"} className={styles.body}>Registration / 报名</Heading>
                         {showFailAlert ?
@@ -210,7 +210,7 @@ function Form({ information }) {
                 </div>}
             {submitted &&
                 <Box h={'92vh'}>
-                    <Image src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
+                    <Image alt='apicdt-background' src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
                     <Flex pb={10} flexDir={'column'}>
                     <Heading fontSize='60px' fontFamily={"ZCOOL XiaoWei"} className={styles.body}>Account Registration / 注册户口</Heading>
                     {showAlert ? <Flex justify={'center'}>

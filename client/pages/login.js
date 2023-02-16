@@ -14,7 +14,7 @@ function LoginPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
         <Flex justify='center' align={'center'} pb={10} position={'relative'} h='92vh'>
-          <Image src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
+          <Image alt='apicdt-background' src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
             <Login />
             </Flex>
             </>
