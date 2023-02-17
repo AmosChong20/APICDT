@@ -22,6 +22,7 @@ function Login() {
         })
 
         if (res?.error) {
+            console.log(res?.error)
             setShowFailAlert(true)
             setTimeout(() => {
                 setShowFailAlert(false)
