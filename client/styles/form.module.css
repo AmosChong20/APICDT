@@ -10,3 +10,9 @@
 .alert {
   position: fixed;
 }
+
+.select {
+  color: white;
+  background-color: transparent;
+  border-color: solid white;
+}
