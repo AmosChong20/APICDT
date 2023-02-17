@@ -132,9 +132,9 @@ function Form({ information }) {
             body: JSON.stringify({
                 email: leaderEmail,
                 password: password,
-                username: 'abcd',
+                username: leaderNameCN,
                 userRole: 'Participant',
-                school: 'abcd'
+                school: schoolNameCN
             }),
             headers: {
                 'Content-type': 'application/json'
