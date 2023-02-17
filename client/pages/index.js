@@ -40,7 +40,7 @@ export default function Home({ rankings }) {
         <meta name="description" content="第十一届亚太大专华语辩论公开赛" />
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         <meta name="google-site-verification" content="byoMix_03ekYKtLn9WcCnMAg1KBR0X4Tyu3ko7toHv4" />
-        <link rel="icon" href="/favicon.ico" />
+        {/* <link rel="shortcut icon" href="/images/favicon.ico" /> */}
       </Head>
 
       <div>

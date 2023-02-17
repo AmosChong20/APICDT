@@ -29,10 +29,11 @@ function About() {
 之后五届比赛则再次由南洋理工大学中文学会举办，筹委会更在第七届扩大比赛规模，将参赛队伍名额从原本的16支增至24支，也将整个赛会带向新的层次。在第八届比赛当中，筹委会首次引入电子抽签程序让抽签过程更系统化和透明化。
 此外，筹委会也组织了评审顾问团，邀请本地和海外辩手进行审题，提高赛会整体水平。同时，筹委会亦成功邀请到多名来自海外的知名辩手担任评审，当中包括台湾的黄执中、澳门的刘京京、香港的邱晨和中国的陈铭等。
                         </Text></Flex>
+                    
+                    <Text pt={20} fontSize={60} color="#fafafa" className={styles.body}>筹委团</Text>
+                    
+                    <Committees committees={data} />
                     </Flex>
-                    {/* <Text pt={20} fontSize={60} color="#fafafa">筹委团</Text>
-                    </Flex>
-                    <Committees committees={data} /> */}
             </Box>
             </>
     );
