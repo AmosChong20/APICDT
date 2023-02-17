@@ -132,7 +132,7 @@ function Form({ information }) {
             body: JSON.stringify({
                 email: leaderEmail,
                 password: password,
-                username: leaderNameCN,
+                username: 'abcdefg',
                 userRole: 'Participant',
                 school: schoolNameCN
             }),
