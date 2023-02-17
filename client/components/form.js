@@ -187,15 +187,15 @@ function Form({ information }) {
                                 <Input fontSize={'18px'} focusBorderColor='white' borderColor={'white'} w='320px' value={leaderNameEN} onChange={(e) => setLeaderNameEN(e.target.value)} placeholder='Name of Team Leader' type='text' isRequired />
                             </Flex>
                                 <Flex flexDir={'row'}>
-                                <select name="areaCode" className={styles.select} id="areaCode" onChange={(e) => setAreaCode(e.target.value)}>
-                                {/* <Select borderColor={'white'} w='150px' placeholder='国际电话区号' onChange={(e) => setAreaCode(e.target.value)}> */}
+                                {/* <select name="areaCode" className={styles.select} id="areaCode" onChange={(e) => setAreaCode(e.target.value)}> */}
+                                <Select borderColor={'white'} w='150px' p='0px' placeholder='国际电话区号' onChange={(e) => setAreaCode(e.target.value)}>
                                     {Countries.map(country => {
                                         return (
                                             <option key={country.id} value={country}>{country}</option>
                                         )
                                     })}
-                                        {/* </Select> */}
-                                        </select>
+                                        </Select>
+                                        {/* </select> */}
                                 <Input ml={5} value={leaderPhone} focusBorderColor='white' borderColor={'white'} w='320px' placeholder='队长联络电话' onChange={(e) => setLeaderPhone(e.target.value)} type='text' isRequired />
                             </Flex>
                             <Input fontSize={'18px'} focusBorderColor='white' borderColor={'white'} w='320px' value={leaderEmail} onChange={(e) => setLeaderEmail(e.target.value)} placeholder='队长电邮地址' type='email' isRequired />
