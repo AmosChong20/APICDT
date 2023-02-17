@@ -126,14 +126,15 @@ function Form({ information }) {
             return null
         }
         console.log(`${process.env.NEXT_PUBLIC_SERVER_URL}auth/local/register`)
+        console.log(leaderEmail, password)
         const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}auth/local/register`, {
             method: 'POST',
             body: JSON.stringify({
                 email: leaderEmail,
                 password: password,
-                username: leaderNameCN,
+                username: 'abcd',
                 userRole: 'Participant',
-                school: schoolNameCN
+                school: 'abcd'
             }),
             headers: {
                 'Content-type': 'application/json'
