@@ -1,11 +1,11 @@
-import { Flex, Heading, Box, Button, Stack, Select } from '@chakra-ui/react'
+import { Flex, Heading, Box, Button, Stack, Select, Alert, AlertIcon, AlertTitle } from '@chakra-ui/react'
 import "@fontsource/ma-shan-zheng"
 import "@fontsource/montserrat"
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import AlertDialog from '../components/alert'
 import { useSession } from 'next-auth/react'
-import countries from '../public/data/country.json'
+import countries from '../public/data/participatingCountry.json'
 import moment from 'moment'
 import Loading from './loading'
 import Head from 'next/head'
@@ -18,6 +18,7 @@ function Starwars({ initialTime }) {
     const [submitted, setSubmitted] = useState(false)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
     const [showFailAlert, setShowFailAlert] = useState(false)
+    const [showTimeAlert, setTimeAlert] = useState(false)
     const [area, setArea] = useState()
     const router = useRouter()
 
@@ -47,19 +48,26 @@ function Starwars({ initialTime }) {
             setShowFailAlert(true)
             setTimeout(() => {
                 setShowFailAlert(false)
-            }, 5000)
+            }, 500)
             return null
         }
         const endTime = date
-        const startTime = new Date('2022-12-15T16:00:00')
+        const startTime = new Date('2023-02-18T15:30:00')
         const newDuration = endTime - startTime.getTime()
+        if (newDuration < 0) {
+            setTimeAlert(true)
+            setTimeout(() => {
+                setTimeAlert(false)
+            }, 500)
+            return null
+        }
         const duration = newDuration / 1000
         setSubmitted(true)
         setShowSuccessAlert(true)
         setTimeout(() => {
             setShowSuccessAlert(false)
             router.push(`/drawnResults/${area}`)
-        }, 5000)
+        }, 2000)
 
         try {
             const userResponse = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}schools?filters[leaderEmail][$eq]=${email}`, {
@@ -106,13 +114,29 @@ function Starwars({ initialTime }) {
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-             <Flex fontFamily={'Ma Shan Zheng'} h={'92vh'} justify='center' align='center' flexDirection={'column'}>
-                {showSuccessAlert ? <AlertDialog status={'success'} description={`成功提交！页面将于5秒后跳转`} /> : <Box></Box>}
-                {showFailAlert ? <AlertDialog status={'error'} description={`请选择地区！`} /> : <Box></Box>}
+            <Flex fontFamily={'Ma Shan Zheng'} h={'92vh'} justify='center' align='center' flexDirection={'column'}>
+            {showSuccessAlert ? <Flex justify={'center'} position='absolute' mt='-400px'>
+                        <Alert status='error' zIndex={1} color={'black'} w={'50vw'}>
+                        <AlertIcon />
+                        <AlertTitle>成功提交！页面将于5秒后跳转！</AlertTitle>
+                                </Alert>
+                        </Flex> : <Box></Box>}
+                        {showFailAlert ? <Flex justify={'center'} position='absolute' mt='-400px'>
+                        <Alert status='error' zIndex={1} color={'black'} w={'50vw'} >
+                        <AlertIcon />
+                        <AlertTitle>请选择地区！</AlertTitle>
+                                </Alert>
+                </Flex> : <Box></Box>}
+                {showTimeAlert ? <Flex justify={'center'} position='absolute' mt='-400px'>
+                        <Alert status='error' zIndex={1} color={'black'} w={'50vw'}>
+                        <AlertIcon />
+                        <AlertTitle>还未到抽签时间！</AlertTitle>
+                                </Alert>
+                        </Flex> : <Box></Box>}
             <Stack align={'center'}>
                 {/* <Heading mb={10} fontSize={100}>{`${date.getHours()} : ${date.getMinutes()} : ${date.getSeconds()}`}</Heading> */}
                 {/* <Text fontFamily={'Montserrat'} fontWeight={800} fontSize={100} mb={10}><Time value={date} format="hh:mm:ss" /></Text> */}
-                <Select borderColor={'Black'} w='150px' placeholder='地区' onChange={(e) => {setArea(e.target.value)}}>
+                <Select borderColor={'Black'} w='150px' placeholder='地区' onChange={(e) => {setArea(e.target.value)}} zIndex={0}>
                         {Countries.map(country => {
                             return (
                                 <option key={country.id}>{country}</option>

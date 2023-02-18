@@ -17,6 +17,7 @@ function About() {
         <meta name="description" content="第十一届亚太大专华语辩论公开赛关于我们" />
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         <link rel="icon" href="/favicon.ico" />
+        <link rel='canonical' href='https://apicdt2023.com/about'/>
       </Head>
             <Box fontFamily={"ZCOOL XiaoWei"} p={20} position={'relative'}>
                 <Image alt='apicdt-background' src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />

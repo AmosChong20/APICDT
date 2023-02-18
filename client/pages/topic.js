@@ -10,7 +10,8 @@ function TopicPage({ topics }) {
         <title>比赛辩题</title>
         <meta name="description" content="第十一届亚太大专华语辩论公开赛辩题" />
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-        <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/favicon.ico" />
+                <link rel='canonical' href='https://apicdt2023.com/topic'/>
       </Head>
             <Topic topics={data}></Topic>
             </>

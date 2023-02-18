@@ -10,7 +10,8 @@ import {
     Stack,
     Alert,
     AlertIcon,
-    AlertTitle
+    AlertTitle,
+    FormHelperText
 } from '@chakra-ui/react'
 import country from '../public/data/country.json'
 import Image from 'next/image';
@@ -40,7 +41,11 @@ function Form({ information }) {
     const [showFailAlert, setShowFailAlert] = useState(false)
     const [showRepeatAlert, setShowRepeatAlert] = useState(false)
     const [showEmailAlert, setShowEmailAlert] = useState(false)
-    const [password, setPassword] = useState()
+    const [firstPassword, setFirstPassword] = useState()
+    const [secondPassword, setSecondPassword] = useState()
+    const [showLessCharacter1, setShowLessCharacter1] = useState(false)
+    const [showLessCharacter2, setShowLessCharacter2] = useState(false)
+    const [identifier, setIdentifier] = useState()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -50,6 +55,31 @@ function Form({ information }) {
             setShowFailAlert(true)
             setTimeout(() => {
                 setShowFailAlert(false)
+            }, 2000)
+            return null
+        }
+
+        if (schoolNameEN.length < 3) {
+            setShowLessCharacter1(true)
+            setTimeout(() => {
+                setShowLessCharacter1(false)
+            }, 2000)
+            return null
+        }
+
+        if (leaderNameEN.length < 3) {
+            setShowLessCharacter2(true)
+            setTimeout(() => {
+                setShowLessCharacter2(false)
+            }, 2000)
+            return null
+        }
+
+        const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if (!leaderEmail.match(validRegex)) {
+            setShowEmailAlert(true)
+            setTimeout(() => {
+                setShowEmailAlert(false)
             }, 2000)
             return null
         }
@@ -90,10 +120,27 @@ function Form({ information }) {
     const handlePasswordSubmit = async (e) => {
         e.preventDefault()
 
-        if (!password) {
+        const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if (!identifier.match(validRegex)) {
+            setShowEmailAlert(true)
+            setTimeout(() => {
+                setShowEmailAlert(false)
+            }, 2000)
+            return null
+        }
+
+        if (!firstPassword || !secondPassword) {
             setShowFailAlert(true)
             setTimeout(() => {
                 setShowFailAlert(false)
+            }, 2000)
+            return null
+        }
+
+        if (firstPassword != secondPassword) {
+            setShowRepeatAlert(true)
+            setTimeout(() => {
+                setShowRepeatAlert(false)
             }, 2000)
             return null
         }
@@ -117,21 +164,14 @@ function Form({ information }) {
             },
         })
         const userData = await userResponse.json()
-        if (userData.error) {
-            setShowEmailAlert(true)
-            setTimeout(() => {
-                setShowEmailAlert(false)
-                setSubmitted(false)
-            }, 2000)
-            return null
-        }
+
         console.log(`${process.env.NEXT_PUBLIC_SERVER_URL}auth/local/register`)
-        console.log(leaderEmail, password)
+        console.log(identifier, firstPassword)
         const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}auth/local/register`, {
             method: 'POST',
             body: JSON.stringify({
-                email: leaderEmail,
-                password: password,
+                email: identifier,
+                password: firstPassword,
                 username: leaderNameEN,
                 userRole: 'Participant',
                 school: schoolNameCN
@@ -143,7 +183,7 @@ function Form({ information }) {
 
         const data = await response.json()
         console.log("Sucessfully registered", data)
-        setPassword('')
+        setFirstPassword('')
         setShowAlert(true)
         setTimeout(() => {
             setShowAlert(false)
@@ -170,6 +210,27 @@ function Form({ information }) {
                         <AlertIcon />
                         <AlertTitle>此邮箱已有账户！</AlertTitle>
                                 </Alert>
+                        </Flex> : <Box></Box>}
+                        {showEmailAlert ? 
+                    <Flex justify={'center'}>
+                    <Alert status='error' color={'black'} w={'50vw'} position='absolute'>
+                    <AlertIcon />
+                    <AlertTitle>电邮地址格式不正确！</AlertTitle>
+                            </Alert>
+                            </Flex> : <Box></Box>}
+                        {showLessCharacter1 ?
+                            <Flex justify={'center'}>
+                        <Alert status='error' color={'black'} w={'50vw'} position='absolute'>
+                        <AlertIcon />
+                        <AlertTitle>学校英文名称不能少于3个字母！</AlertTitle>
+                                </Alert>
+                            </Flex> : <Box></Box>}
+                            {showLessCharacter2 ?
+                            <Flex justify={'center'}>
+                        <Alert status='error' color={'black'} w={'50vw'} position='absolute'>
+                        <AlertIcon />
+                        <AlertTitle>队长英文名称不能少于3个字母！</AlertTitle>
+                                </Alert>
                                 </Flex>: <Box></Box>}
                     <FormControl>
             
@@ -188,10 +249,10 @@ function Form({ information }) {
                             </Flex>
                                 <Flex flexDir={'row'}>
                                 {/* <select name="areaCode" className={styles.select} id="areaCode" onChange={(e) => setAreaCode(e.target.value)}> */}
-                                <Select borderColor={'white'} w='150px' p='0px' placeholder='国际电话区号' onChange={(e) => setAreaCode(e.target.value)}>
+                                <Select borderColor={'white'} w='200px' p='0px' placeholder='国际电话区号' color={'white'} onChange={(e) => setAreaCode(e.target.value)}>
                                     {Countries.map(country => {
                                         return (
-                                            <option key={country.id} value={country}>{country}</option>
+                                            <option key={country.id} value={areaCode}>{country}</option>
                                         )
                                     })}
                                         </Select>
@@ -208,14 +269,14 @@ function Form({ information }) {
                             </Flex>
                         </Stack>
                     </FormControl>
-                        <Button fontSize={'20'} type='submit' p={6} w={'6.5vw'} colorScheme={'whiteAlpha'} onClick={handleSubmit}>报名</Button>
+                        <Button fontSize={'20'} type='submit' p={6} w={'6.5vw'} colorScheme={'whiteAlpha'} onClick={handleSubmit}>继续</Button>
                         </Stack>
                 </div>}
             {submitted &&
                 <Box h={'92vh'}>
                     <Image alt='apicdt-background' src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
                     <Flex pb={10} flexDir={'column'}>
-                    <Heading fontSize='60px' fontFamily={"ZCOOL XiaoWei"} className={styles.body}>Account Registration / 注册户口</Heading>
+                    <Heading fontSize='60px' fontFamily={"ZCOOL XiaoWei"} className={styles.body}>Create Account / 创建账户</Heading>
                     {showAlert ? <Flex justify={'center'}>
                         <Alert status='success' color={'black'} w={'50vw'} position='absolute'>
                         <AlertIcon />
@@ -228,6 +289,13 @@ function Form({ information }) {
                         <AlertIcon />
                         <AlertTitle>信息不完整！</AlertTitle>
                                 </Alert>
+                            </Flex> : <Box></Box>}
+                            {showRepeatAlert ?
+                            <Flex justify={'center'}>
+                        <Alert status='error' color={'black'} w={'50vw'} position='absolute'>
+                        <AlertIcon />
+                        <AlertTitle>密码不一致！</AlertTitle>
+                                </Alert>
                                 </Flex>: <Box></Box>}
                         {showEmailAlert ? 
                     <Flex justify={'center'}>
@@ -237,8 +305,13 @@ function Form({ information }) {
                             </Alert>
                             </Flex> : <Box></Box>}
                         <FormControl mt={"80px"} mb={10}>
-                        <FormLabel fontSize={'26px'}>Password / 密码</FormLabel>
-                        <Input  fontSize={'18px'}placeholder='密码' value={password} type='password' focusBorderColor='white' borderColor={'white'} w='320px' onChange={(e) => setPassword(e.target.value)} isRequired/>
+                        <FormLabel fontSize={'26px'}>Enter email / 输入电邮地址</FormLabel>
+                        <Input  fontSize={'18px'} placeholder='电邮地址' value={identifier} type='email' focusBorderColor='white' borderColor={'white'} w='320px' onChange={(e) => setIdentifier(e.target.value)} isRequired/>
+                        <FormLabel fontSize={'26px'} mt={'20px'}>Enter new password / 输入新密码</FormLabel>
+                        <Input  fontSize={'18px'} placeholder='新密码' value={firstPassword} type='password' focusBorderColor='white' borderColor={'white'} w='320px' onChange={(e) => setFirstPassword(e.target.value)} isRequired/>
+                        <FormLabel fontSize={'26px'} mt={'20px'}>Verify new password / 验证新密码</FormLabel>
+                        <Input  fontSize={'18px'} placeholder='重复密码' value={secondPassword} type='password' focusBorderColor='white' borderColor={'white'} w='320px' onChange={(e) => setSecondPassword(e.target.value)} isRequired/>                
+                        <FormHelperText color={'white'} fontSize={'16px'} mt='20px'>*此电邮地址与密码用于选手登录</FormHelperText>
                         </FormControl>
                         <Flex mt='80px'>
                     <Button p={6} w='6.5vw' fontSize={'20'} colorScheme={'whiteAlpha'} type='submit' onClick={handlePasswordSubmit}>提交</Button>

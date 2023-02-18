@@ -1,4 +1,4 @@
-import { FormLabel, FormControl, CardBody, Heading, Stack, Card, Avatar, Input, Button, Box, Flex } from "@chakra-ui/react";
+import { FormLabel, FormControl, CardBody, Heading, Alert, AlertIcon, AlertTitle, Stack, Card, Avatar, Input, Button, Box, Flex } from "@chakra-ui/react";
 import '@fontsource/ma-shan-zheng'
 import { signIn } from "next-auth/react";
 import { useState } from 'react'
@@ -39,8 +39,14 @@ function Login() {
 
     return (
         <Stack align={'center'} mt={10}>
-            {showFailAlert ? <AlertDialog status={'error'} description={`登录失败！`} /> : <Box></Box>}
-        <Card fontFamily={"ZCOOL XiaoWei"} bgColor="whiteAlpha.800" boxShadow={'lg'} maxW='md' pb={20} pl={10} pr={10} pt={10} align='center' justifyContent='center'>
+            {showFailAlert ?
+                            <Flex justify={'center'}>
+                        <Alert status='error' zIndex='1' opacity='100%' color={'black'} w={'50vw'} position='absolute'>
+                        <AlertIcon />
+                        <AlertTitle>登录失败！</AlertTitle>
+                                </Alert>
+                                </Flex>: <Box></Box>}
+        <Card fontFamily={"ZCOOL XiaoWei"} zIndex='0' bgColor="whiteAlpha.800" boxShadow={'lg'} maxW='md' pb={20} pl={10} pr={10} pt={10} align='center' justifyContent='center'>
             <CardBody>
                 <Flex justify={'center'}>
                     <Avatar bg='#2f0101'/>
