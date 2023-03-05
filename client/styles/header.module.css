@@ -6,3 +6,23 @@
 .image {
   z-index: 0;
 }
+
+.chinHeader {
+  /* font-size: 3.8vw; */
+  font-size: 50px;
+}
+
+.engHeader {
+  /* font-size: 2vw; */
+  font-size: 25px;
+}
+
+@media (max-width: 768px) {
+  .chinHeader {
+    font-size: 30px;
+  }
+
+  .engHeader {
+    font-size: 15px;
+  }
+}

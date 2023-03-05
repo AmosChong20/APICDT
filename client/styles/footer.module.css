@@ -2,3 +2,55 @@
     padding-top: 50px;
     Text-decoration: underline 
 }
+
+.header {
+    font-size: 40px;
+}
+
+.subheader {
+    font-size: 20px;
+}
+
+@media screen and (max-width: 1024px) {
+    .header {
+        font-size: 35px;
+    }
+
+    .subheader {
+        font-size: 18px;
+    }
+    
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        font-size: 25px;
+    }
+
+    .subheader {
+        font-size: 15px;
+    }
+    
+}
+
+@media screen and (max-width: 414px) {
+    .header {
+        font-size: 20px;
+    }
+
+    .subheader {
+        font-size: 8px;
+    }
+    
+}
+
+@media screen and (max-width: 375px) {
+    .header {
+        font-size: 15px;
+    }
+
+    .subheader {
+        font-size: 8px;
+    }
+    
+}

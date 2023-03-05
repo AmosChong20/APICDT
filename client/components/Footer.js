@@ -6,39 +6,44 @@ import {
   Stack,
   Text,
   Flex,
-  Image,
   Link
 } from '@chakra-ui/react'
 import * as React from 'react'
-import { FaFacebook, FaInstagram, FaYoutube, FaWeibo } from 'react-icons/fa'
+import { FaFacebook, FaInstagram, FaYoutube, FaWeibo, FaTwitter } from 'react-icons/fa'
 import "@fontsource/zcool-xiaowei"
+import { SiWechat } from "react-icons/si"
 import styles from '../styles/footer.module.css'
+import Image from 'next/image'
 
 export default function Footer() {
   return (
     <Flex bg='black'>
-    <Container bg='black' as="footer" role="contentinfo" maxW="5xl" >
+    <Container bg='black' as="footer" role="contentinfo" maxW="5xl">
     <Stack 
     bg='black'
       spacing="12"
       direction={{ base: 'column', md: 'row' }}
       justify="space-between"
       py={{ base: '12', md: '16' }}
-      
     >
-      <Stack direction="row" spacing="370">
+          <Stack direction="row" spacing={'20px'}>
 
       <Stack spacing={{ base: '6', md: '8' }} align="start">
       <Stack direction="column" spacing="20">
-          <Stack spacing="-2" minW="36" flex="1">
-          <Text paddingLeft={7} mb={30} fontSize={40} fontFamily= {"ZCOOL XiaoWei"} textColor="rgba(252, 255, 234,0.918)" letterSpacing={4}>联系方式</Text>
-            <Stack spacing="-1.1" shouldWrapChildren>
-            <Text letterSpacing={4} fontSize={20} fontFamily= {"ZCOOL XiaoWei" } as='u' color="rgba(252, 255, 234,0.918)"  >筹长</Text>
+          <Stack spacing="-2" flex="1">
+          <Text paddingLeft={7} mb={30} className={styles.header} fontFamily= {"ZCOOL XiaoWei"} textColor="rgba(252, 255, 234,0.918)" letterSpacing={4}>联系方式</Text>
+                  <Stack spacing="-1.1" shouldWrapChildren>
+                  <Text letterSpacing={4} className={styles.subheader} fontFamily= {"ZCOOL XiaoWei" } color="rgba(252, 255, 234,0.918)"  >官方邮箱：chinesesoc-apdct@e.ntu.edu.sg</Text>
+                  <Text letterSpacing={4} className={styles.subheader} fontFamily= {"ZCOOL XiaoWei" } color="rgba(252, 255, 234,0.918)"  >官方微信：APICDT11</Text>
+                  <Text letterSpacing={4} className={styles.subheader} fontFamily= {"ZCOOL XiaoWei" } color="rgba(252, 255, 234,0.918)"  >商务合作：cs-apdct-bm@e.ntu.edu.sg</Text>
+                  <Text letterSpacing={4} className={styles.subheader} fontFamily= {"ZCOOL XiaoWei" } color="rgba(252, 255, 234,0.918)"  >赛务相关：cs-apdct-adjudicator@e.ntu.edu.sg</Text>
+                  <Text letterSpacing={4} className={styles.subheader} fontFamily= {"ZCOOL XiaoWei" } color="rgba(252, 255, 234,0.918)"  >宣传伙伴：cs-apdct-publicity@e.ntu.edu.sg</Text>
+            {/* <Text letterSpacing={4} fontSize={20} fontFamily= {"ZCOOL XiaoWei" } as='u' color="rgba(252, 255, 234,0.918)"  >筹长</Text>
             <Text letterSpacing={4} fontSize={20} fontFamily= {"ZCOOL XiaoWei" }  textColor="rgba(252, 255, 234,0.918)">章佳怡：+65 9096 0059</Text>
             <Text letterSpacing={4} fontSize={20} fontFamily= {"ZCOOL XiaoWei"}  textColor="rgba(252, 255, 234,0.918)">JZHANG095@e.ntu.edu.sg</Text>
             <Text  letterSpacing={4} fontSize={20} fontFamily= {"ZCOOL XiaoWei" }  textColor="rgba(252, 255, 234,0.918)" className={styles.text} >副筹长</Text>
             <Text letterSpacing={4} fontSize={20} fontFamily= {"ZCOOL XiaoWei" }  textColor="rgba(252, 255, 234,0.918)">刘懿萱：+65 8718 0203</Text>
-            <Text letterSpacing={4} fontSize={20} fontFamily= {"ZCOOL XiaoWei" }  textColor="rgba(252, 255, 234,0.918)"  >C210074@e.ntu.edu.sg</Text>
+            <Text letterSpacing={4} fontSize={20} fontFamily= {"ZCOOL XiaoWei" }  textColor="rgba(252, 255, 234,0.918)"  >C210074@e.ntu.edu.sg</Text> */}
             </Stack>
           </Stack>
           {/* <Stack spacing="2" minW="36" flex="1">
@@ -56,17 +61,17 @@ export default function Footer() {
         </Stack>
         </Stack>
         <Stack>
-        <Stack spacing="-2" minW="36" flex="1">
+        <Stack spacing="-2" flex="1">
   
-        <Text letterSpacing={4}  mb={30} fontSize={40} fontFamily= {"ZCOOL XiaoWei"}  textColor="rgba(252, 255, 234,0.918)">关注我们
+        <Text letterSpacing={4}  mb={30} className={styles.header} fontFamily= {"ZCOOL XiaoWei"}  textColor="rgba(252, 255, 234,0.918)">关注我们
                 </Text>
-                <ButtonGroup variant="ghost">
-
-        <IconButton color ='white' target="_blank" as="a" href="https://www.facebook.com/NTUCSapchinesedebate/" aria-label="Facebook" icon={<FaFacebook fontSize="1.25rem" />} />
-                  <IconButton color='white' target="_blank" as="a" href="https://www.instagram.com/apchinesedebate" aria-label="Instagram" icon={<FaInstagram fontSize="1.25rem" />} />
-                  <IconButton color='white' target="_blank" as="a" href="https://www.instagram.com/apchinesedebate" aria-label="Youtube" icon={<FaYoutube fontSize="1.25rem" />} />
-                  <IconButton color ='white'  target="_blank" as="a" href="https://www.instagram.com/apchinesedebate" aria-label="Weibo" icon={<FaWeibo fontSize="1.25rem" />} />
-      </ButtonGroup>
+                <ButtonGroup variant="ghost" spacing='0'>
+                <IconButton color ='white'  target="_blank" size='sm' as="a" href="https://weibo.com/p/1005055398940329?is_all=1" aria-label="Weibo" icon={<FaWeibo />} />
+        <IconButton color ='white' target="_blank" as="a" size='sm' href="https://twitter.com/csapdct" aria-label="Twitter" icon={<FaTwitter />} />
+                  <IconButton color='white' target="_blank" as="a" size='sm' href="https://www.instagram.com/apchinesedebate/" aria-label="Instagram" icon={<FaInstagram />} />
+                  <IconButton color='white' target="_blank" as="a" size='sm' href="https://www.xiaohongshu.com/user/profile/63cd06ac00000000260106cc?xhsshare=CopyLink&appuid=63cd06ac00000000260106cc&apptime=1677688231" aria-label="XiaoHongShu" icon={<Image src={require('../public/logo/XiaoHongShu.svg')} width={20} height={20} />} />
+                  <IconButton color='white' target="_blank" as="a" size='sm' href="https://mp.weixin.qq.com/s/2VYK0aMiHbqht_IdMjJXyg" aria-label="XiaoHongShu" icon={<SiWechat />} />
+                </ButtonGroup>
         {/* <div>
         <Stack  direction='column' spacing="2.5" >
         <ul >

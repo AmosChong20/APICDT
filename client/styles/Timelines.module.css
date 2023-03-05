@@ -14,7 +14,7 @@
   padding-top: 12%;
 	padding-bottom: 10vh;
 	color: white;
-	font-size: 1.83vw;
+	font-size: 30px;
   letter-spacing: 0.3em;
   z-index: 1;
 }
@@ -23,7 +23,7 @@
   padding-top: 8%;
 	padding-bottom: 10vh;
 	color: white;
-	font-size: 3vw;
+	font-size: 40px;
   letter-spacing: 0.4em;
   z-index: 1;
 }
@@ -35,4 +35,34 @@
 .bottom{
   border-color: black;
   padding-bottom: 10%;
+}
+
+@media screen and (max-width: 1024px) {
+  .text{
+    font-size: 25px;
+  }
+
+  .header{
+    font-size: 35px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .text{
+    font-size: 20px;
+  }
+
+  .header{
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .text{
+    font-size: 12px;
+  }
+
+  .header{
+    font-size: 20px;
+  }
 }

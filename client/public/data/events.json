@@ -1,13 +1,10 @@
 {
     "events":[
-    { "date": "15/02/2023", "event": "电子报名开始","description": "大家去选手报名处报名" },
-    { "date": "15/03/2023", "event": "比赛开始","description":  "微信联系" },
-    { "date": "15/03/2023", "event":"小组比赛", "description": "恭喜嗷"},
-    { "date": "15/03/2023", "event":"半决赛比赛", "description": "大家去选手报名处报名"},
-    { "date": "15/03/2023", "event":"半决赛比赛", "description": "大家去选手报名处报名"},
-    { "date": "15/03/2023", "event":"决赛比赛", "description": "大家去选手报名处报名"},
-    { "date": "15/03/2023", "event":"南洋季军"},
-    { "date": "15/06/2023", "event":"比赛结束"}
+    { "date": "10/03/2023", "event": "开始电子报名","description": "大家去选手报名处报名" },
+    { "date": "27/03/2023", "event": "电子报名截止","description":  "微信联系" },
+    { "date": "01/04/2023", "event":"电子抽签", "description": "恭喜嗷"},
+    { "date": "01/05/2023", "event":"停止成交资料", "description": "大家去选手报名处报名"},
+    { "date": "04/07/2023", "event":"选手报道", "description": "大家去选手报名处报名"},
+    { "date": "05/07/2023 - 09/07/2023", "event":"正式比赛", "description": "大家去选手报名处报名"}
     ]
-
 }

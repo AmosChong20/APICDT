@@ -18,14 +18,14 @@ function Ranking({ data, group }) {
   }
   return (
     <Flex flexDir={'column'} color={'white'} >
-      <Heading fontFamily={'Ma Shan Zheng'} color={'white'}>{group}组</Heading>
+      <Heading fontFamily={'ZCOOL XiaoWei'} color={'white'}>{group}组</Heading>
       <TableContainer paddingBottom={10} w='30vw'>
         <Table variant="simple">
           <Thead>
               <Tr>
-            <Th fontFamily= {'Ma Shan Zheng'} fontSize='3xl'padding={5} isNumeric color='white'>排名</Th>
-            <Th  fontFamily= {'Ma Shan Zheng'} fontSize='3xl' padding={5} color='white'>学校</Th>
-            <Th fontFamily= {'Ma Shan Zheng'} fontSize='3xl'padding={5} isNumeric color='white'>积分</Th>
+            <Th fontFamily= {'ZCOOL XiaoWei'} padding={5} isNumeric color='white'>排名</Th>
+            <Th  fontFamily= {'ZCOOL XiaoWei'}  padding={5} color='white'>学校</Th>
+            <Th fontFamily= {'ZCOOL XiaoWei'} padding={5} isNumeric color='white'>积分</Th>
           </Tr>
         </Thead>
               <Tbody>

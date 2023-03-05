@@ -1,0 +1,77 @@
+.header {
+    font-size: 30px;
+    padding-left: 20px;
+}
+
+.smallHeader {
+    font-size: 25px;
+    padding-right: 10px;
+    width: 30vw;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 1440px) {
+    .header {
+        font-size: 25px;
+        padding-left: 20px;
+    }
+    
+    .smallHeader {
+        font-size: 18px;
+        width: 35vw;
+    }
+    
+}
+
+@media screen and (max-width: 1023px) {
+    .header {
+        font-size: 20px;
+        padding-left: 20px;
+    }
+    
+    .smallHeader {
+        font-size: 15px;
+        width: 40vw;
+    }
+}
+
+
+@media screen and (max-width: 757px) {
+    .header {
+        font-size: 17px;
+        padding-left: 20px;
+    }
+    
+    .smallHeader {
+        font-size: 13px;
+        width: 50vw;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .header {
+        font-size: 15px;
+        padding-left: 20px;
+    }
+    
+    .smallHeader {
+        font-size: 10px;
+        width: 65vw;
+    }
+
+}
+
+
+@media screen and (max-width: 320px) {
+    .header {
+        font-size: 13px;
+        padding-left: 10px;
+    }
+
+    .smallHeader {
+        font-size: 10px;
+        width: 70vw;
+    }
+
+}

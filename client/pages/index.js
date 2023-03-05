@@ -47,7 +47,7 @@ export default function Home({ rankings }) {
       <div>
         <Header title="第十一届亚太大专华语辩论公开赛"/>
         <Timelines  />
-        <Rankings ranking={res}/>
+        {/* <Rankings ranking={res}/> */}
       </div>
     </div>
   )

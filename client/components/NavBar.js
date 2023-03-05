@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useSession, signOut } from 'next-auth/react'
+import styles from '../styles/navbar.module.css'
 
 function NavBar() {
   const [drawn, setDrawn] = useState(true)
@@ -30,15 +31,15 @@ function NavBar() {
   }
 
   return (
-    <Flex bgColor='#2f0101' color='whiteAlpha.700' justify='space-between' h={'8vh'} alignItems='center' fontFamily={'ZCOOL QingKe HuangYou'} letterSpacing='0.42em' fontWeight={400}>
-      <Flex pl={5} fontSize='3.125vh' align='center'>
+    <Flex bgColor='#2f0101' color='whiteAlpha.700' h={'8vh'} alignItems='center' justify={'space-between'} fontFamily={'ZCOOL QingKe HuangYou'} letterSpacing='0.42em' fontWeight={400}>
+      <Flex className={styles.header} align='center'>
       <Link href="/" passHref>
         亚太辩论
       </Link>
       </Flex>
       {role === 'Participant' ?
           (
-            <Flex align={'center'} justify='space-between' h='100%' pr={5} fontSize={'2.35vh'}>
+            <Flex align={'center'} justify='space-between' h='100%' pr={5} className={styles.smallHeader}>
         
         <Link href="/userHome" passHref>
         <Flex ml={5} _hover={{color: 'white'}}>主页</Flex>
@@ -62,7 +63,7 @@ function NavBar() {
           </Flex>
         ) : (role === 'Judge' ?
           (
-            <Flex align={'center'} justify='space-between' h='100%' pr={5} fontSize={'2.35vh'}>
+            <Flex align={'center'} justify='space-between' h='100%' pr={5} className={styles.smallHeader}>
           <Link href="/matches" passHref>
         <Flex ml={5} _hover={{color: 'white'}}>评分表</Flex>
             </Link>
@@ -72,7 +73,7 @@ function NavBar() {
               </Flex>
           ) : (role === 'Committee' ?
             (
-              <Flex align={'center'} justify='space-between' h='100%' pr={5} fontSize={'2.35vh'}>
+              <Flex align={'center'} justify='space-between' h='100%' pr={5} className={styles.smallHeader}>
               <Link href="/userHome" passHref>
                   <Flex ml={5} _hover={{color: 'white'}}>消息栏</Flex>
                 </Link>
@@ -90,25 +91,25 @@ function NavBar() {
               </Link>
                 </Flex>
             ) : (
-              <Flex align={'center'} justify='space-between' h='100%' pr={5} fontSize={'2.35vh'}>
+              <Flex align={'center'} h='100%' className={styles.smallHeader}>
               <Link href="/" passHref>
-                  <Flex ml={5} _hover={{color: 'white'}} >主页</Flex>
+                  <Flex className={styles.individual} _hover={{color: 'white'}} >主页</Flex>
                 </Link>
                 
                 <Link href="/topic" passHref>
-                  <Flex ml={5} _hover={{color: 'white'}}>辩题</Flex>
+                  <Flex className={styles.individual} _hover={{color: 'white'}}>辩题</Flex>
                 </Link>
         
             <Link href="/registration" passHref>
-              <Flex ml={5} _hover={{color: 'white'}}>选手报名</Flex>
+              <Flex className={styles.individual} _hover={{color: 'white'}}>选手报名</Flex>
                 </Link>
                 
                 <Link href="/login" passHref>
-              <Flex ml={5} _hover={{color: 'white'}}>登录</Flex>
+              <Flex className={styles.individual} _hover={{color: 'white'}}>登录</Flex>
                 </Link>
         
             <Link href="/about" passHref>
-            <Flex ml={5} _hover={{color: 'white'}}>关于我们</Flex>
+            <Flex className={styles.individual} _hover={{color: 'white'}}>关于我们</Flex>
                 </Link>
                   </Flex>
             )))
