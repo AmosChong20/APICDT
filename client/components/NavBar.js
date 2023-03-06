@@ -96,9 +96,9 @@ function NavBar() {
                   <Flex className={styles.individual} _hover={{color: 'white'}} >主页</Flex>
                 </Link>
                 
-                <Link href="/topic" passHref>
+                {/* <Link href="/topic" passHref>
                   <Flex className={styles.individual} _hover={{color: 'white'}}>辩题</Flex>
-                </Link>
+                </Link> */}
         
             <Link href="/registration" passHref>
               <Flex className={styles.individual} _hover={{color: 'white'}}>选手报名</Flex>

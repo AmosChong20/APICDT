@@ -1,29 +1,58 @@
 .header {
-    font-size: 30px;
-    padding-left: 20px;
+    font-size: 33px;
+    padding-left: 50px;
 }
 
 .smallHeader {
-    font-size: 25px;
-    padding-right: 10px;
+    font-size: 28px;
+    padding-right: 50px;
     width: 30vw;
     justify-content: space-between;
 }
 
-@media screen and (max-width: 1440px) {
+@media (max-width: 1780px) {
+    .header {
+        font-size: 30px;
+        padding-left: 40px;
+    }
+    
+    .smallHeader {
+        font-size: 22px;
+        width: 28vw;
+        padding-right: 30px;
+    }
+    
+}
+
+@media (max-width: 1440px) {
+    .header {
+        font-size: 25px;
+        padding-left: 40px;
+    }
+    
+    .smallHeader {
+        font-size: 18px;
+        width: 32vw;
+        padding-right: 30px;
+    }
+    
+}
+
+@media (max-width: 1024px) {
     .header {
         font-size: 25px;
         padding-left: 20px;
     }
     
     .smallHeader {
-        font-size: 18px;
-        width: 35vw;
+        font-size: 20px;
+        width: 37vw;
+        padding-right: 20px;
     }
-    
 }
 
-@media screen and (max-width: 1023px) {
+
+@media (max-width: 768px) {
     .header {
         font-size: 20px;
         padding-left: 20px;
@@ -31,39 +60,28 @@
     
     .smallHeader {
         font-size: 15px;
-        width: 40vw;
-    }
-}
-
-
-@media screen and (max-width: 757px) {
-    .header {
-        font-size: 17px;
-        padding-left: 20px;
-    }
-    
-    .smallHeader {
-        font-size: 13px;
-        width: 50vw;
+        width: 45vw;
+        padding-right: 10px;
     }
 
 }
 
-@media screen and (max-width: 500px) {
+@media (max-width: 500px) {
     .header {
         font-size: 15px;
         padding-left: 20px;
     }
     
     .smallHeader {
-        font-size: 10px;
+        font-size: 12px;
         width: 65vw;
+        padding-right: 8px;
     }
 
 }
 
 
-@media screen and (max-width: 320px) {
+@media (max-width: 320px) {
     .header {
         font-size: 13px;
         padding-left: 10px;
@@ -72,6 +90,7 @@
     .smallHeader {
         font-size: 10px;
         width: 70vw;
+        padding-right: 10px;
     }
 
 }

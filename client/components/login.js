@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import "@fontsource/zcool-xiaowei"
 import AlertDialog from "./alert";
+import styles from '../styles/login.module.css'
 
 function Login() {
     const router = useRouter()
@@ -45,8 +46,8 @@ function Login() {
                         <AlertIcon />
                         <AlertTitle>登录失败！</AlertTitle>
                                 </Alert>
-                                </Flex>: <Box></Box>}
-        <Card fontFamily={"ZCOOL XiaoWei"} zIndex='0' bgColor="whiteAlpha.800" boxShadow={'lg'} maxW='md' pb={20} pl={10} pr={10} pt={10} align='center' justifyContent='center'>
+                </Flex> : <Box></Box>}
+        <Card fontFamily={"ZCOOL XiaoWei"} className={styles.card} zIndex='0' bgColor="whiteAlpha.800" boxShadow={'lg'} maxW='md' align='center' justifyContent='center'>
             <CardBody>
                 <Flex justify={'center'}>
                     <Avatar bg='#2f0101'/>
@@ -62,7 +63,7 @@ function Login() {
                         <Button type='submit' h={'40px'} w={'120px'} colorScheme={'blackAlpha'} onClick={handleSubmit}>Login</Button>
             </Stack>
         </CardBody>
-            </Card>
+                </Card>
             </Stack>
       );
 }

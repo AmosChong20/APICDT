@@ -2,3 +2,13 @@
   z-index: 0;
   object-fit: cover;
 }
+
+.card {
+  padding: 10px 10px 10px 10px;
+}
+
+@media screen and (max-width: 375px) {
+  .card {
+    padding: 0;
+  }
+}

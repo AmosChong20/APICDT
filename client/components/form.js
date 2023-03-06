@@ -1,6 +1,5 @@
 import {
     FormControl,
-    FormLabel,
     Input,
     Select,
     Flex,
@@ -192,12 +191,12 @@ function Form({ information }) {
     }
 
     return (
-        <Box pt={"50px"} pl={'75px'} fontFamily={"ZCOOL XiaoWei"} color="#fcffea" position={'relative'}>
+        <Box className={styles.box} fontFamily={"ZCOOL XiaoWei"} color="#fcffea" position={'relative'}>
             {!submitted &&
                 <div>
                     <Image alt='apicdt-background' src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
             <Stack  pb={10}>
-            <Heading fontSize='60px' fontFamily={"ZCOOL XiaoWei"} className={styles.body}>Registration / 报名</Heading>
+            <div className={styles.header}>Registration / 报名</div>
                         {showFailAlert ?
                             <Flex justify={'center'}>
                         <Alert status='error' color={'black'} w={'50vw'} position='absolute'>
@@ -234,49 +233,49 @@ function Form({ information }) {
                                 </Flex>: <Box></Box>}
                     <FormControl>
             
-                        <Stack mt={10} mb={10}>
-                            <FormLabel fontSize={'26px'}>Particulars of School / 学校资料</FormLabel>
-                            <Flex flexDirection='row' mt='59px' mb='29px' gap={10} fontWeight={'500px'}>
-                                <Input fontSize={'18px'} focusBorderColor='white' borderColor={'white'} w='320px' value={schoolNameCN} onChange={(e) => setSchoolNameCN(e.target.value)} placeholder='学校名称' type='text' isRequired />
-                                <Input fontSize={'18px'} focusBorderColor='white' borderColor={'white'} w='320px' value={schoolNameEN} onChange={(e) => setSchoolNameEN(e.target.value)} placeholder='Name of School' type='text' isRequired />
-                            </Flex>
+                        <Stack mb={10}>
+                            <label className={styles.subheader}>Particulars of School / 学校资料</label>
+                            <div className={styles.formarea}>
+                                <input className={styles.input} focusBorderColor='white' borderColor={'white'} w='320px' value={schoolNameCN} onChange={(e) => setSchoolNameCN(e.target.value)} placeholder='学校名称' type='text' isRequired />
+                                <input className={styles.input} focusBorderColor='white' borderColor={'white'} w='320px' value={schoolNameEN} onChange={(e) => setSchoolNameEN(e.target.value)} placeholder='Name of School' type='text' isRequired />
+                            </div>
                         </Stack>
                         <Stack mb={10} gap={2}>
-                            <FormLabel fontSize={'26px'}>Particulars of Team Leader / 队长资料</FormLabel>
-                            <Flex flexDirection='row' mt='59px' mb='29px' gap={10} fontWeight={'500px'}>
-                                <Input fontSize={'18px'} focusBorderColor='white' borderColor={'white'} w='320px' value={leaderNameCN} onChange={(e) => setLeaderNameCN(e.target.value)} placeholder='队长名称' type='text' isRequired />
-                                <Input fontSize={'18px'} focusBorderColor='white' borderColor={'white'} w='320px' value={leaderNameEN} onChange={(e) => setLeaderNameEN(e.target.value)} placeholder='Name of Team Leader' type='text' isRequired />
-                            </Flex>
+                            <label className={styles.subheader}>Particulars of Team Leader / 队长资料</label>
+                            <div className={styles.formarea}>
+                                <input className={styles.input} focusBorderColor='white' borderColor={'white'} w='320px' value={leaderNameCN} onChange={(e) => setLeaderNameCN(e.target.value)} placeholder='队长名称' type='text' isRequired />
+                                <input className={styles.input} focusBorderColor='white' borderColor={'white'} w='320px' value={leaderNameEN} onChange={(e) => setLeaderNameEN(e.target.value)} placeholder='Name of Team Leader' type='text' isRequired />
+                            </div>
                                 <Flex flexDir={'row'}>
                                 {/* <select name="areaCode" className={styles.select} id="areaCode" onChange={(e) => setAreaCode(e.target.value)}> */}
-                                <Select borderColor={'white'} w='200px' p='0px' placeholder='国际电话区号' color={'white'} onChange={(e) => setAreaCode(e.target.value)}>
+                                <select className={styles.select} borderColor={'white'} w='200px' p='0px' placeholder='国际电话区号' color={'white'} onChange={(e) => setAreaCode(e.target.value)}>
                                     {Countries.map(country => {
                                         return (
                                             <option key={country.id} value={areaCode}>{country}</option>
                                         )
                                     })}
-                                        </Select>
+                                        </select>
                                         {/* </select> */}
-                                <Input ml={5} value={leaderPhone} focusBorderColor='white' borderColor={'white'} w='320px' placeholder='队长联络电话' onChange={(e) => setLeaderPhone(e.target.value)} type='text' isRequired />
+                                <input value={leaderPhone} className={styles.input} focusBorderColor='white' borderColor={'white'} w='320px' placeholder='队长联络电话' onChange={(e) => setLeaderPhone(e.target.value)} type='text' isRequired />
                             </Flex>
-                            <Input fontSize={'18px'} focusBorderColor='white' borderColor={'white'} w='320px' value={leaderEmail} onChange={(e) => setLeaderEmail(e.target.value)} placeholder='队长电邮地址' type='email' isRequired />
+                            <input className={styles.input} focusBorderColor='white' borderColor={'white'} w='320px' value={leaderEmail} onChange={(e) => setLeaderEmail(e.target.value)} placeholder='队长电邮地址' type='email' isRequired />
                         </Stack>
                         <Stack mb={10}>
-                            <FormLabel fontSize={'26px'}>Debate Topic / 辩题</FormLabel>
-                            <Flex flexDirection='row' mt='59px' mb='29px' gap={10} fontWeight={'500px'}>
-                                <Input fontSize={'18px'} errorBorderColor='red' focusBorderColor='white' borderColor={'white'} w='320px' value={topic1} onChange={(e) => setTopic1(e.target.value)} placeholder='辩题一' type='text' isRequired />
-                                <Input fontSize={'18px'} focusBorderColor='white' borderColor={'white'} w='320px' value={topic2} onChange={(e) => setTopic2(e.target.value)} placeholder='辩题二' type='text' isRequired />
-                            </Flex>
+                            <label className={styles.subheader}>Debate Topic / 辩题</label>
+                            <div className={styles.formarea}>
+                                <input className={styles.input} errorBorderColor='red' focusBorderColor='white' borderColor={'white'} w='320px' value={topic1} onChange={(e) => setTopic1(e.target.value)} placeholder='辩题一' type='text' isRequired />
+                                <input className={styles.input} focusBorderColor='white' borderColor={'white'} w='320px' value={topic2} onChange={(e) => setTopic2(e.target.value)} placeholder='辩题二' type='text' isRequired />
+                            </div>
                         </Stack>
                     </FormControl>
-                        <Button fontSize={'20'} type='submit' p={6} w={'6.5vw'} colorScheme={'whiteAlpha'} onClick={handleSubmit}>继续</Button>
+                        <button className={styles.submit} type='submit' p={6} w={'3vw'} colorScheme={'whiteAlpha'} onClick={handleSubmit}>继续</button>
                         </Stack>
                 </div>}
             {submitted &&
                 <Box h={'92vh'}>
                     <Image alt='apicdt-background' src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
                     <Flex pb={10} flexDir={'column'}>
-                    <Heading fontSize='60px' fontFamily={"ZCOOL XiaoWei"} className={styles.body}>Create Account / 创建账户</Heading>
+                    <div fontSize='60px' fontFamily={"ZCOOL XiaoWei"} className={styles.header}>Create Account / 创建账户</div>
                     {showAlert ? <Flex justify={'center'}>
                         <Alert status='success' color={'black'} w={'50vw'} position='absolute'>
                         <AlertIcon />
@@ -305,17 +304,17 @@ function Form({ information }) {
                             </Alert>
                             </Flex> : <Box></Box>}
                         <FormControl mt={"80px"} mb={10}>
-                        <FormLabel fontSize={'26px'}>Enter email / 输入电邮地址</FormLabel>
-                        <Input  fontSize={'18px'} placeholder='电邮地址' value={identifier} type='email' focusBorderColor='white' borderColor={'white'} w='320px' onChange={(e) => setIdentifier(e.target.value)} isRequired/>
-                        <FormLabel fontSize={'26px'} mt={'20px'}>Enter new password / 输入新密码</FormLabel>
-                        <Input  fontSize={'18px'} placeholder='新密码' value={firstPassword} type='password' focusBorderColor='white' borderColor={'white'} w='320px' onChange={(e) => setFirstPassword(e.target.value)} isRequired/>
-                        <FormLabel fontSize={'26px'} mt={'20px'}>Verify new password / 验证新密码</FormLabel>
-                        <Input  fontSize={'18px'} placeholder='重复密码' value={secondPassword} type='password' focusBorderColor='white' borderColor={'white'} w='320px' onChange={(e) => setSecondPassword(e.target.value)} isRequired/>                
-                        <FormHelperText color={'white'} fontSize={'16px'} mt='20px'>*此电邮地址与密码用于选手登录</FormHelperText>
+                        <label className={styles.subheader}>Enter email / 输入电邮地址</label>
+                        <input  className={styles.input} placeholder='电邮地址' value={identifier} type='email' focusBorderColor='white' borderColor={'white'} w='320px' onChange={(e) => setIdentifier(e.target.value)} isRequired/>
+                        <label className={styles.subheader} mt={'20px'}>Enter new password / 输入新密码</label>
+                        <input  className={styles.input} placeholder='新密码' value={firstPassword} type='password' focusBorderColor='white' borderColor={'white'} w='320px' onChange={(e) => setFirstPassword(e.target.value)} isRequired/>
+                        <label className={styles.subheader} mt={'20px'}>Verify new password / 验证新密码</label>
+                        <input  className={styles.input} placeholder='重复密码' value={secondPassword} type='password' focusBorderColor='white' borderColor={'white'} w='320px' onChange={(e) => setSecondPassword(e.target.value)} isRequired/>                
+                            <div color={'white'} className={styles.hint} mt='20px'>*此电邮地址与密码用于选手登录</div>
                         </FormControl>
-                        <Flex mt='80px'>
-                    <Button p={6} w='6.5vw' fontSize={'20'} colorScheme={'whiteAlpha'} type='submit' onClick={handlePasswordSubmit}>提交</Button>
-                    <Button ml={5} p={6} w='6.5vw' fontSize={'20'} colorScheme={'whiteAlpha'} type='submit' onClick={handleBackSubmit}>返回</Button>    
+                        <Flex mt='60px' gap='15px'>
+                    <button className={styles.submit} colorScheme={'whiteAlpha'} type='submit' onClick={handlePasswordSubmit}>提交</button>
+                    <button className={styles.submit} colorScheme={'whiteAlpha'} type='submit' onClick={handleBackSubmit}>返回</button>    
                     </Flex>
                     </Flex>
                 </Box>}

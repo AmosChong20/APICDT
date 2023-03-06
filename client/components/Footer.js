@@ -17,7 +17,7 @@ import Image from 'next/image'
 
 export default function Footer() {
   return (
-    <Flex bg='black'>
+    <Flex bg='black' h={'100%'}>
     <Container bg='black' as="footer" role="contentinfo" maxW="5xl">
     <Stack 
     bg='black'

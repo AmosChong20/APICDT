@@ -1,5 +1,52 @@
-.body {
-  z-index: 1
+.header {
+  z-index: 1;
+  font-size: 60px;
+}
+
+.submit {
+  font-size: 20px;
+  background-color: grey;
+  color: white;
+  z-index: 1;
+  border-radius: 8px;
+  padding: 10px;
+  width: 100px;
+}
+
+.box {
+  padding-left: 60px;
+  padding-top: 45px;
+}
+
+.formarea {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+
+.subheader {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.input {
+  font-size: 18px;
+  width: 320px;
+  background-color: transparent;
+  border: solid white 1px;
+  border-radius: 8px;
+  padding: 7px;
+  padding-left: 10px;
+  display: flex;
+  color: white;
+}
+
+.hint {
+  font-size: 18px;
+}
+
+.input::placeholder {
+  color: #b3b3b3;
 }
 
 .image {
@@ -13,6 +60,106 @@
 
 .select {
   color: white;
-  background-color: transparent;
+  background-color: black;
   border-color: solid white;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+@media (max-width: 1024px) {
+  .box {
+    padding-left: 40px;
+    padding-top: 27px;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 415px) {
+  .box {
+    padding-left: 30px;
+    padding-top: 20px;
+  }
+
+  .header {
+    z-index: 1;
+    font-size: 40px;
+  }
+
+  .input {
+    font-size: 15px;
+    width: 300px;
+  }
+
+  .hint {
+    font-size: 15px;
+  }
+
+  .subheader {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .select {
+    font-size: 15px;
+  }
+
+  .formarea {
+    gap: 15px;
+  }
+
+  .submit {
+    font-size: 15px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 660px) {
+  .box {
+    padding-left: 25px;
+    padding-top: 15px;
+  }
+
+  .header {
+    z-index: 1;
+    font-size: 25px;
+    margin-bottom: -30px;
+  }
+
+  .subheader {
+    font-size: 17px;
+    margin-bottom: 7px;
+  }
+
+  .formarea {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .input {
+    width: 200px;
+    font-size: 13px;
+    padding: 5px;
+    padding-left: 8px;
+  }
+
+  .hint {
+    font-size: 13px;
+  }
+
+  .select {
+    font-size: 13px;
+    width: 120px;
+  }
+
+  .submit {
+    font-size: 15px;
+    padding: 6px;
+    width: 80px;
+  }
+}
+
+@media (max-width: 320px) {
+  .input {
+    width: 150px;
+  }
+  
 }
