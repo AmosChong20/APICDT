@@ -18,14 +18,24 @@ import AlertDialog from './alert';
 import "@fontsource/inder";
 import "@fontsource/zcool-xiaowei"
 // import Button from './Button';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from '../styles/form.module.css'
 import { useRouter } from 'next/router';
 
 function Form({ information }) {
     const router = useRouter()
 
+    useEffect(() => {
+        if (new Date() < new Date('2023-03-10T00:00:00')) {
+            setNotTimeYet(true)
+        }
+        else {
+            setNotTimeYet(false)
+        }
+    }, [])
+
     const { Countries } = country
+    const [notTimeYet, setNotTimeYet] = useState()
     const [schoolNameCN, setSchoolNameCN] = useState()
     const [schoolNameEN, setSchoolNameEN] = useState()
     const [leaderNameCN, setLeaderNameCN] = useState()
@@ -200,7 +210,8 @@ function Form({ information }) {
 
     return (
         <Box className={styles.box} fontFamily={"ZCOOL XiaoWei"} color="#fcffea" position={'relative'}>
-            {!submitted &&
+            {notTimeYet && <Flex justify={'center'} mt={'70px'} ml={'-15px'} fontSize={'26px'} h={'92vh'} color='black'>本届比赛暂未开放报名！</Flex>}
+            {!notTimeYet && !submitted &&
                 <div>
                     <Image alt='apicdt-background' src={require('../public/logo/long-banner.png')} priority fill className={styles.image} />
             <Stack  pb={10}>
