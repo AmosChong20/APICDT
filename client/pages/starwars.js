@@ -1,6 +1,7 @@
 import { Flex, Heading, Box, Button, Stack, Select, Alert, AlertIcon, AlertTitle } from '@chakra-ui/react'
 import "@fontsource/ma-shan-zheng"
 import "@fontsource/montserrat"
+import "@fontsource/zcool-xiaowei"
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import AlertDialog from '../components/alert'
@@ -9,17 +10,21 @@ import countries from '../public/data/participatingCountry.json'
 import moment from 'moment'
 import Loading from './loading'
 import Head from 'next/head'
+import starTime from '../public/data/starwars.json'
 
 function Starwars({ initialTime }) {
     const { data: session } = useSession()
     const { Countries } = countries
+    const { Starwars } = starTime
 
     const [date, setDate] = useState(new Date())
     const [submitted, setSubmitted] = useState(false)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
     const [showFailAlert, setShowFailAlert] = useState(false)
     const [showTimeAlert, setTimeAlert] = useState(false)
+    const [showRepeatAlert, setRepeatAlert] = useState(false)
     const [area, setArea] = useState()
+    const [selectedArea, setSelectedArea] = useState()
     const router = useRouter()
 
     useEffect(() => {
@@ -42,18 +47,30 @@ function Starwars({ initialTime }) {
         )
     const email = session.user.email
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (!area) {
-            setShowFailAlert(true)
-            setTimeout(() => {
-                setShowFailAlert(false)
-            }, 500)
+    const handleAreaChange = async (e) => {
+        console.log(e.target.value)
+        if (!e.target.value) {
+            setSelectedArea(null)
             return null
         }
+        setArea(e.target.value)
+        setSelectedArea(Starwars.filter((country) => country.area === e.target.value))
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // if (!area) {
+        //     setShowFailAlert(true)
+        //     setTimeout(() => {
+        //         setShowFailAlert(false)
+        //     }, 500)
+        //     return null
+        // }
         const endTime = date
-        const startTime = new Date('2023-02-18T15:30:00')
+        const startTime = new Date(selectedArea[0].startTime)
         const newDuration = endTime - startTime.getTime()
+        console.log(newDuration)
         if (newDuration < 0) {
             setTimeAlert(true)
             setTimeout(() => {
@@ -63,11 +80,6 @@ function Starwars({ initialTime }) {
         }
         const duration = newDuration / 1000
         setSubmitted(true)
-        setShowSuccessAlert(true)
-        setTimeout(() => {
-            setShowSuccessAlert(false)
-            router.push(`/drawnResults/${area}`)
-        }, 2000)
 
         try {
             const userResponse = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}schools?filters[leaderEmail][$eq]=${email}`, {
@@ -79,6 +91,22 @@ function Starwars({ initialTime }) {
             console.log(email)
             const userRes = await userResponse.json()
             const schoolName = userRes.data[0].attributes.schoolNameCN
+            const schoolResponse = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}drawn-results?filters[schoolName][$eq]=${schoolName}`, {
+                method: 'GET',
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            })
+            const schoolRes = await schoolResponse.json()
+            console.log(schoolRes)
+            if (schoolRes.data.length > 0) {
+                setRepeatAlert(true)
+                setTimeout(() => {
+                    setRepeatAlert(false)
+                    router.push(`/drawnResults/${area}`)
+                }, 2000)
+                return null
+            }
             const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}drawn-results`, {
                 method: 'POST',
                 body: JSON.stringify({
@@ -100,6 +128,12 @@ function Starwars({ initialTime }) {
             console.log(e)
         }
 
+        setShowSuccessAlert(true)
+        setTimeout(() => {
+            setShowSuccessAlert(false)
+            router.push(`/drawnResults/${area}`)
+        }, 2000)
+
     }
 
     if (session === null) {
@@ -114,11 +148,19 @@ function Starwars({ initialTime }) {
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-            <Flex fontFamily={'Ma Shan Zheng'} h={'92vh'} justify='center' align='center' flexDirection={'column'}>
-            {showSuccessAlert ? <Flex justify={'center'} position='absolute' mt='-400px'>
-                        <Alert status='error' zIndex={1} color={'black'} w={'50vw'}>
+            <Flex fontFamily={'ZCOOL XiaoWei'} h={'92vh'} align='center' flexDirection={'column'}>
+                {selectedArea ?
+                    <Stack align='center' mt={'100px'}>
+                        {showSuccessAlert ? <Flex justify={'center'} position='absolute' mt='-400px'>
+                        <Alert status='success' zIndex={1} color={'black'} w={'50vw'}>
                         <AlertIcon />
                         <AlertTitle>成功提交！页面将于5秒后跳转！</AlertTitle>
+                                </Alert>
+                </Flex> : <Box></Box>}
+                {showRepeatAlert ? <Flex justify={'center'} position='absolute' mt='-400px'>
+                        <Alert status='error' zIndex={1} color={'black'} w={'50vw'}>
+                        <AlertIcon />
+                        <AlertTitle>此队伍已提交！</AlertTitle>
                                 </Alert>
                         </Flex> : <Box></Box>}
                         {showFailAlert ? <Flex justify={'center'} position='absolute' mt='-400px'>
@@ -133,19 +175,28 @@ function Starwars({ initialTime }) {
                         <AlertTitle>还未到抽签时间！</AlertTitle>
                                 </Alert>
                         </Flex> : <Box></Box>}
-            <Stack align={'center'}>
-                {/* <Heading mb={10} fontSize={100}>{`${date.getHours()} : ${date.getMinutes()} : ${date.getSeconds()}`}</Heading> */}
-                {/* <Text fontFamily={'Montserrat'} fontWeight={800} fontSize={100} mb={10}><Time value={date} format="hh:mm:ss" /></Text> */}
-                <Select borderColor={'Black'} w='150px' placeholder='地区' onChange={(e) => {setArea(e.target.value)}} zIndex={0}>
-                        {Countries.map(country => {
+                <Select borderColor={'Black'} w='150px' placeholder='地区' value={area} onChange={handleAreaChange} zIndex={0}>
+                        {Starwars.map(country => {
                             return (
-                                <option key={country.id}>{country}</option>
+                                <option key={country.area}>{country.area}</option>
                                 )
                             })}
-                        </Select>
-                <Heading fontSize={138} mb={10}>{moment(date).format("hh:mm:ss a")}</Heading>
-                <Button fontSize={'72px'} p={10} mb={20} onClick={handleSubmit}>提交</Button>
-            </Stack>
+                    </Select>
+                     <Stack align='center'>
+                        <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={'54px'}>{`${selectedArea[0].area}`} </Heading>
+                        <Heading fontFamily={'ZCOOL XiaoWei'}>{`开始抽签时间：${moment(selectedArea[0].startTime).format("D/M/yyyy hh:mm a")}`} </Heading>
+                        <Heading fontFamily={'ZCOOL XiaoWei'}>{`结束抽签时间：${moment(selectedArea[0].endTime).format("D/M/yyyy hh:mm a")}`} </Heading>
+                        <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={138} mb={10}>{moment(date).format("hh:mm:ss a")}</Heading>
+                <Button fontSize={'65px'} p={10} mb={20} onClick={handleSubmit}>提交</Button></Stack> </Stack>: <Stack align='center' mt={'100px'}>
+                <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={'100px'} mb={'50px'}>电子抽签系统</Heading>
+                {/* <Text fontFamily={'Montserrat'} fontWeight={800} fontSize={100} mb={10}><Time value={date} format="hh:mm:ss" /></Text> */}
+                <Select borderColor={'Black'} w='150px' placeholder='地区' onChange={handleAreaChange} zIndex={0}>
+                        {Starwars.map(country => {
+                            return (
+                                <option key={country.area}>{country.area}</option>
+                                )
+                            })}
+                    </Select></Stack>}
             {/* {submitted ? <Button mt={10}><Link href='/'>查看结果</Link></Button> : <Box></Box>} */}
             </Flex>
             </>

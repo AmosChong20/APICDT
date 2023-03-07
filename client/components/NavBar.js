@@ -101,7 +101,7 @@ function NavBar() {
                 </Link> */}
         
             <Link href="/registration" passHref>
-              <Flex className={styles.individual} _hover={{color: 'white'}}>选手报名</Flex>
+              <Flex className={styles.individual} _hover={{color: 'white'}}>队伍报名</Flex>
                 </Link>
                 
                 <Link href="/login" passHref>
