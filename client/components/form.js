@@ -144,6 +144,14 @@ function Form({ information }) {
             return null
         }
 
+        if (firstPassword.length < 6 || secondPassword.length < 6) {
+            setShowFailAlert(true)
+            setTimeout(() => {
+                setShowFailAlert(false)
+            }, 2000)
+            return null
+        }
+
         const userResponse = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}schools`, {
             method: 'POST',
             body: JSON.stringify({
@@ -287,6 +295,13 @@ function Form({ information }) {
                         <Alert status='error' color={'black'} w={'50vw'} position='absolute'>
                         <AlertIcon />
                         <AlertTitle>信息不完整！</AlertTitle>
+                                </Alert>
+                            </Flex> : <Box></Box>}
+                            {showFailAlert ?
+                            <Flex justify={'center'}>
+                        <Alert status='error' color={'black'} w={'50vw'} position='absolute'>
+                        <AlertIcon />
+                        <AlertTitle>密码需有至少6个字符！</AlertTitle>
                                 </Alert>
                             </Flex> : <Box></Box>}
                             {showRepeatAlert ?
