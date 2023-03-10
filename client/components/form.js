@@ -26,7 +26,7 @@ function Form({ information }) {
     const router = useRouter()
 
     useEffect(() => {
-        if (new Date() < new Date('2023-03-10T00:00:00')) {
+        if (new Date() < new Date('2023-04-01T00:00:00')) {
             setNotTimeYet(true)
         }
         else {
