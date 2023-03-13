@@ -13,6 +13,10 @@
   width: 100px;
 }
 
+.link {
+  text-decoration: underline;
+}
+
 .box {
   padding-left: 60px;
   padding-top: 45px;

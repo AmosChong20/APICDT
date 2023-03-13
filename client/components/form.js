@@ -5,6 +5,7 @@ import {
     Flex,
     Box,
     Heading,
+    Text,
     Button,
     Stack,
     Alert,
@@ -13,6 +14,7 @@ import {
     FormHelperText
 } from '@chakra-ui/react'
 import country from '../public/data/country.json'
+import Link from 'next/link'
 import Image from 'next/image';
 import AlertDialog from './alert';
 import "@fontsource/inder";
@@ -26,7 +28,7 @@ function Form({ information }) {
     const router = useRouter()
 
     useEffect(() => {
-        if (new Date() < new Date('2023-04-01T00:00:00')) {
+        if (new Date() < new Date('2023-03-15T00:00:00')) {
             setNotTimeYet(true)
         }
         else {
@@ -285,8 +287,10 @@ function Form({ information }) {
                                 <input className={styles.input} errorBorderColor='red' focusBorderColor='white' borderColor={'white'} w='320px' value={topic1} onChange={(e) => setTopic1(e.target.value)} placeholder='辩题一' type='text' isRequired />
                                 <input className={styles.input} focusBorderColor='white' borderColor={'white'} w='320px' value={topic2} onChange={(e) => setTopic2(e.target.value)} placeholder='辩题二' type='text' isRequired />
                             </div>
-                        </Stack>
-                    </FormControl>
+                            </Stack>
+                            
+                            <Text className={styles.hint} mb={'20px'}>* By submitting the registration form, you consent to the NTU Chinese Society to collect your personal data to facilitate the registration of the Asia Pacific Intervarsity Chinese Debate Tournament.</Text>
+                     </FormControl>
                         <button className={styles.submit} type='submit' p={6} w={'3vw'} colorScheme={'whiteAlpha'} onClick={handleSubmit}>继续</button>
                         </Stack>
                 </div>}
