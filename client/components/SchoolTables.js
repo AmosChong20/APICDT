@@ -1,6 +1,7 @@
-import { Flex, Heading ,Container, Button } from '@chakra-ui/react'
+import { Flex, Heading ,Container, Box, Button } from '@chakra-ui/react'
 import "@fontsource/ma-shan-zheng"
 import Schools from "./SchoolTable";
+import * as React from 'react';
 import {
     Table,
     Thead,
@@ -64,10 +65,65 @@ function SchoolTables({ schools }) {
         })
     }
     return ( 
-       <Container  maxW='700px' >
-        < Flex mt = { 20} fontFamily = { 'ZCOOL XiaoWei'} align = { 'center'} flexDir = { 'column'} >
-                    <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={50} mb={20}>队伍查询</Heading>
-                {data.map(school => {
+       <Box w='85vw'>
+        < Flex mt = {20} fontFamily = { 'ZCOOL XiaoWei'} align = { 'center'} flexDir = { 'column'} >
+                <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={50} mb={20}>队伍查询</Heading>
+                <TableContainer fontSize={18}>
+                    <Table variant={'simple'}>
+                        <Thead>
+                            <Tr>
+                                <Th>组别</Th>
+                                <Th>学校名字（中）</Th>
+                                <Th>学校名字（英）</Th>
+                                <Th>队长名字（中）</Th>
+                                <Th>队长名字（英）</Th>
+                                <Th>联络电话</Th>
+                                <Th>电子邮箱地址</Th>
+                                <Th>辩题一</Th>
+                                <Th>辩题二</Th>
+                        </Tr>
+                        </Thead>
+                        <Tbody>
+                                {data.map(school => {
+                                    return (
+                                        <Tr>
+                                            <Td><Select size={'lg'} placeholder={school.attributes.group} onChange={updateState(school.id)}> 
+                                                {
+                                                    Groups.map((value) => {
+                                                    if (value ==="无" && school.attributes.group != null){
+                                                        return
+                                                    }
+                                                    else if (value ==="无" && school.attributes.group === null){
+                                                        return(
+                                                            <option key={school.id} value={value}>{value}</option>
+                                                        )
+                                                    }
+                                                    else if  (value != school.attributes.group){
+                                                    return(
+                                                    <option key={school.id} value={value}>{value}</option>
+                                                            )
+                                                        }
+                                                        // <option key={school.id} value={value}>{value}</option>
+                                                    })
+                                                    
+                                                }
+                                                                            </Select>
+                                            </Td>
+                                            <Td>{school.attributes.schoolNameCN}</Td>
+                                            <Td>{school.attributes.schoolNameEN}</Td>
+                                            <Td>{school.attributes.leaderNameCN}</Td>
+                                            <Td>{school.attributes.leaderNameEN}</Td>
+                                            <Td>{school.attributes.leaderPhone}</Td>
+                                            <Td>{school.attributes.leaderEmail}</Td>
+                                            <Td>{school.attributes.topic1}</Td>
+                                            <Td>{school.attributes.topic2}</Td>
+                                        </Tr>
+                                    )
+                                })}
+                        </Tbody>
+                    </Table>
+                </TableContainer>
+                {/* {data.map(school => {
                 return (
                       //  <Schools key={school.id} leaderEmail={school.attributes.leaderEmail} drawn_result={school.attributes.drawn_result} schoolNameEN={school.attributes.schoolNameEN} leaderNameEN={school.attributes.leaderNameEN} leaderNameCN={school.attributes.leaderNameCN} leaderPhone={school.attributes.leaderPhone} schoolNameCN={school.attributes.schoolNameCN} topic1={school.attributes.topic1} topic2={school.attributes.topic2} group={school.attributes.group} point={school.attributes.point}/>
                       <TableContainer mb={10} key={school.id} >
@@ -134,12 +190,12 @@ function SchoolTables({ schools }) {
               </TableContainer>
                         
                 )
-})}
+})} */}
     <Stack  padding={20}>
     <Button type='submit' colorScheme={'blackAlpha'} iconSpacing='10' onClick={handleSubmit}>确认修改/Modification</Button>
     </Stack>
             </Flex>
-        </Container>
+        </Box>
      );
 }
 

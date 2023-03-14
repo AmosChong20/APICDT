@@ -5,6 +5,7 @@ import Footer from '../components/Footer'
 import { SessionProvider } from 'next-auth/react'
 import { Analytics } from '@vercel/analytics/react';
 import Head from 'next/head'
+import { ThemeProvider,createTheme } from '@mui/material/styles';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -20,7 +21,7 @@ function MyApp({ Component, pageProps }) {
       <NavBar/>
         <Component {...pageProps} />
         <Analytics />
-    <Footer/>
+          <Footer />
         </ChakraProvider>
       </SessionProvider>
   )

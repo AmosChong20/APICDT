@@ -10,7 +10,7 @@
     justify-content: space-between;
 }
 
-@media (max-width: 1780px) {
+@media (max-width: 1780px) and (min-width: 1441px){
     .header {
         font-size: 30px;
         padding-left: 40px;
@@ -18,13 +18,13 @@
     
     .smallHeader {
         font-size: 22px;
-        width: 28vw;
+        width: 35vw;
         padding-right: 30px;
     }
     
 }
 
-@media (max-width: 1440px) {
+@media (max-width: 1440px) and (min-width: 1025px){
     .header {
         font-size: 25px;
         padding-left: 40px;
@@ -32,50 +32,49 @@
     
     .smallHeader {
         font-size: 18px;
-        width: 32vw;
+        width: 36vw;
         padding-right: 30px;
     }
     
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1024px) and (min-width: 769px){
     .header {
         font-size: 25px;
         padding-left: 20px;
     }
     
     .smallHeader {
-        font-size: 20px;
-        width: 37vw;
+        font-size: 15px;
+        width: 53vw;
         padding-right: 20px;
     }
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 768px) and (min-width: 501px){
     .header {
         font-size: 20px;
         padding-left: 20px;
     }
     
     .smallHeader {
-        font-size: 15px;
-        width: 45vw;
+        font-size: 12px;
+        width: 71vw;
         padding-right: 10px;
     }
 
 }
 
-@media (max-width: 500px) {
+@media (max-width: 500px) and (min-width: 321px){
     .header {
-        font-size: 15px;
-        padding-left: 20px;
+        font-size: 12px;
+        padding-left: 15px;
     }
     
     .smallHeader {
-        font-size: 12px;
-        width: 65vw;
-        padding-right: 8px;
+        font-size: 8px;
+        width: 85vw;
     }
 
 }

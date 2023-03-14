@@ -1,3 +1,4 @@
+import { Flex, Container } from "@chakra-ui/react";
 import School from "../components/SchoolTables";
 import Head from 'next/head'
 
@@ -10,8 +11,10 @@ function SchoolCheck({schools}) {
         <meta name="description" content="第十一届亚太大专华语辩论公开赛参赛队伍" />
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         <link rel="icon" href="/favicon.ico" />
-      </Head>
+            </Head>
+            <Flex justify='center'>
             <School schools={res} />
+            </Flex>
             </>
     );
 }
