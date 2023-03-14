@@ -86,7 +86,7 @@ function SchoolTables({ schools }) {
                         <Tbody>
                                 {data.map(school => {
                                     return (
-                                        <Tr>
+                                        <Tr key={school.id}>
                                             <Td><Select size={'lg'} placeholder={school.attributes.group} onChange={updateState(school.id)}> 
                                                 {
                                                     Groups.map((value) => {
