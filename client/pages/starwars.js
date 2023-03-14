@@ -19,6 +19,7 @@ function Starwars({ initialTime }) {
 
     const [date, setDate] = useState(new Date())
     const [submitted, setSubmitted] = useState(false)
+    const [notTimeYet, setNotTimeYet] = useState(false)
     const [showSuccessAlert, setShowSuccessAlert] = useState(false)
     const [showFailAlert, setShowFailAlert] = useState(false)
     const [showTimeAlert, setTimeAlert] = useState(false)
@@ -35,15 +36,24 @@ function Starwars({ initialTime }) {
         }
     }, [])
 
+    useEffect(() => {
+        if (new Date() < new Date('2023-03-17T17:00:00')) {
+            setNotTimeYet(true)
+        }
+        else {
+            setNotTimeYet(false)
+        }
+    }, [])
+
     if (!date) {
         return (
-            <Loading/>
+            <Loading />
         )
     }
 
-    if (!session) 
+    if (!session)
         return (
-            <Loading/>
+            <Loading />
         )
     const email = session.user.email
 
@@ -82,7 +92,7 @@ function Starwars({ initialTime }) {
         setSubmitted(true)
 
         try {
-            const userResponse = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}schools?filters[leaderEmail][$eq]=${email}`, {
+            const userResponse = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}schools?filters[accountEmail][$eq]=${email}`, {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json'
@@ -140,65 +150,67 @@ function Starwars({ initialTime }) {
         router.push('/login')
     }
 
-    return ( 
+    return (
         <>
             <Head>
-        <title>电子抽签系统</title>
-        <meta name="description" content="第十一届亚太大专华语辩论公开赛抽签" />
-        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-            <Flex fontFamily={'ZCOOL XiaoWei'} h={'92vh'} align='center' flexDirection={'column'}>
-                {selectedArea ?
-                    <Stack align='center' mt={'100px'}>
-                        {showSuccessAlert ? <Flex justify={'center'} position='absolute' mt='-400px'>
-                        <Alert status='success' zIndex={1} color={'black'} w={'50vw'}>
-                        <AlertIcon />
-                        <AlertTitle>成功提交！页面将于5秒后跳转！</AlertTitle>
+                <title>电子抽签系统</title>
+                <meta name="description" content="第十一届亚太大专华语辩论公开赛抽签" />
+                <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+            {notTimeYet && <Flex justify={'center'} mt={'70px'} ml={'-15px'} fontFamily={'ZCOOL XiaoWei'} fontSize={'26px'} h={'92vh'} color='black'>电子抽签系统暂未开放！</Flex>}
+            {!notTimeYet &&
+                <Flex fontFamily={'ZCOOL XiaoWei'} h={'92vh'} align='center' flexDirection={'column'}>
+                    {selectedArea ?
+                        <Stack align='center' mt={'100px'}>
+                            {showSuccessAlert ? <Flex justify={'center'} position='absolute' mt='-400px'>
+                                <Alert status='success' zIndex={1} color={'black'} w={'50vw'}>
+                                    <AlertIcon />
+                                    <AlertTitle>成功提交！页面将于5秒后跳转！</AlertTitle>
                                 </Alert>
-                </Flex> : <Box></Box>}
-                {showRepeatAlert ? <Flex justify={'center'} position='absolute' mt='-400px'>
-                        <Alert status='error' zIndex={1} color={'black'} w={'50vw'}>
-                        <AlertIcon />
-                        <AlertTitle>此队伍已提交！</AlertTitle>
+                            </Flex> : <Box></Box>}
+                            {showRepeatAlert ? <Flex justify={'center'} position='absolute' mt='-400px'>
+                                <Alert status='error' zIndex={1} color={'black'} w={'50vw'}>
+                                    <AlertIcon />
+                                    <AlertTitle>此队伍已提交！</AlertTitle>
                                 </Alert>
-                        </Flex> : <Box></Box>}
-                        {showFailAlert ? <Flex justify={'center'} position='absolute' mt='-400px'>
-                        <Alert status='error' zIndex={1} color={'black'} w={'50vw'} >
-                        <AlertIcon />
-                        <AlertTitle>请选择地区！</AlertTitle>
+                            </Flex> : <Box></Box>}
+                            {showFailAlert ? <Flex justify={'center'} position='absolute' mt='-400px'>
+                                <Alert status='error' zIndex={1} color={'black'} w={'50vw'} >
+                                    <AlertIcon />
+                                    <AlertTitle>请选择地区！</AlertTitle>
                                 </Alert>
-                </Flex> : <Box></Box>}
-                {showTimeAlert ? <Flex justify={'center'} position='absolute' mt='-400px'>
-                        <Alert status='error' zIndex={1} color={'black'} w={'50vw'}>
-                        <AlertIcon />
-                        <AlertTitle>还未到抽签时间！</AlertTitle>
+                            </Flex> : <Box></Box>}
+                            {showTimeAlert ? <Flex justify={'center'} position='absolute' mt='-400px'>
+                                <Alert status='error' zIndex={1} color={'black'} w={'50vw'}>
+                                    <AlertIcon />
+                                    <AlertTitle>还未到抽签时间！</AlertTitle>
                                 </Alert>
-                        </Flex> : <Box></Box>}
-                <Select borderColor={'Black'} w='150px' placeholder='地区' value={area} onChange={handleAreaChange} zIndex={0}>
-                        {Starwars.map(country => {
-                            return (
-                                <option key={country.area}>{country.area}</option>
-                                )
-                            })}
-                    </Select>
-                     <Stack align='center'>
-                        <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={'54px'}>{`${selectedArea[0].area}`} </Heading>
-                        <Heading fontFamily={'ZCOOL XiaoWei'}>{`开始抽签时间：${moment(selectedArea[0].startTime).format("D/M/yyyy hh:mm a")}`} </Heading>
-                        <Heading fontFamily={'ZCOOL XiaoWei'}>{`结束抽签时间：${moment(selectedArea[0].endTime).format("D/M/yyyy hh:mm a")}`} </Heading>
-                        <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={138} mb={10}>{moment(date).format("hh:mm:ss a")}</Heading>
-                <Button fontSize={'65px'} p={10} mb={20} onClick={handleSubmit}>提交</Button></Stack> </Stack>: <Stack align='center' mt={'100px'}>
-                <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={'100px'} mb={'50px'}>电子抽签系统</Heading>
-                {/* <Text fontFamily={'Montserrat'} fontWeight={800} fontSize={100} mb={10}><Time value={date} format="hh:mm:ss" /></Text> */}
-                <Select borderColor={'Black'} w='150px' placeholder='地区' onChange={handleAreaChange} zIndex={0}>
-                        {Starwars.map(country => {
-                            return (
-                                <option key={country.area}>{country.area}</option>
-                                )
-                            })}
-                    </Select></Stack>}
-            {/* {submitted ? <Button mt={10}><Link href='/'>查看结果</Link></Button> : <Box></Box>} */}
-            </Flex>
+                            </Flex> : <Box></Box>}
+                            <Select borderColor={'Black'} w='150px' placeholder='地区' value={area} onChange={handleAreaChange} zIndex={0}>
+                                {Starwars.map(country => {
+                                    return (
+                                        <option key={country.area}>{country.area}</option>
+                                    )
+                                })}
+                            </Select>
+                            <Stack align='center'>
+                                <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={'54px'}>{`${selectedArea[0].area}`} </Heading>
+                                <Heading fontFamily={'ZCOOL XiaoWei'}>{`开始抽签时间：${moment(selectedArea[0].startTime).format("D/M/yyyy hh:mm a")}`} </Heading>
+                                <Heading fontFamily={'ZCOOL XiaoWei'}>{`结束抽签时间：${moment(selectedArea[0].endTime).format("D/M/yyyy hh:mm a")}`} </Heading>
+                                <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={138} mb={10}>{moment(date).format("hh:mm:ss a")}</Heading>
+                                <Button fontSize={'65px'} p={10} mb={20} onClick={handleSubmit}>提交</Button></Stack> </Stack> : <Stack align='center' mt={'100px'}>
+                            <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={'100px'} mb={'50px'}>电子抽签系统</Heading>
+                            {/* <Text fontFamily={'Montserrat'} fontWeight={800} fontSize={100} mb={10}><Time value={date} format="hh:mm:ss" /></Text> */}
+                            <Select borderColor={'Black'} w='150px' placeholder='地区' onChange={handleAreaChange} zIndex={0}>
+                                {Starwars.map(country => {
+                                    return (
+                                        <option key={country.area}>{country.area}</option>
+                                    )
+                                })}
+                            </Select></Stack>}
+                    {/* {submitted ? <Button mt={10}><Link href='/'>查看结果</Link></Button> : <Box></Box>} */}
+                </Flex>}
             </>
     );
 }

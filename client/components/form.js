@@ -175,7 +175,8 @@ function Form({ information }) {
                     topic1: topic1,
                     topic2: topic2,
                     leaderEmail: leaderEmail,
-                    leaderPhone: areaCode + leaderPhone
+                    leaderPhone: areaCode + leaderPhone,
+                    accountEmail: identifier
                 }
             }),
             headers: {
@@ -183,9 +184,6 @@ function Form({ information }) {
             },
         })
         const userData = await userResponse.json()
-
-        console.log(`${process.env.NEXT_PUBLIC_SERVER_URL}auth/local/register`)
-        console.log(identifier, firstPassword)
         const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}auth/local/register`, {
             method: 'POST',
             body: JSON.stringify({

@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { DeleteIcon, AddIcon, EditIcon } from "@chakra-ui/icons"
 import { useRouter } from "next/router";
 import Loading from "../pages/loading";
+import "@fontsource/zcool-xiaowei"
 
 function Announcement({ announcement }) {
     const [role, setRole] = useState()
@@ -28,16 +29,16 @@ function Announcement({ announcement }) {
 
 
     return ( 
-        <Flex mt={10} fontFamily={'Ma Shan Zheng'} align='center' flexDir='column' minH={'92vh'}>
-            {role === 'Committee' ? <Flex flexDir={'column'} align={'center'}> <Heading mb={10} fontFamily={'Ma Shan Zheng'}>消息栏</Heading> <Button onClick={() => router.push('/addNews')}><Flex flexDir={'row'} align='center' justify={'center'}><AddIcon/><Flex fontSize={'20'} ml={3}>添加消息</Flex></Flex></Button> </Flex>
-                                        : <Heading fontFamily={'Ma Shan Zheng'}>最新消息</Heading>}
+        <Flex mt={10} fontFamily={'ZCOOL XiaoWei'} align='center' flexDir='column' minH={'92vh'}>
+            {role === 'Committee' ? <Flex flexDir={'column'} align={'center'}> <Heading mb={10} fontFamily={'ZCOOL XiaoWei'}>消息栏</Heading> <Button onClick={() => router.push('/addNews')}><Flex flexDir={'row'} align='center' justify={'center'}><AddIcon/><Flex fontSize={'20'} ml={3}>添加消息</Flex></Flex></Button> </Flex>
+                                        : <Heading fontFamily={'ZCOOL XiaoWei'}>最新消息</Heading>}
             <Box align='center' mt={10} width='100%' >
                 {announcement.map((ann) => {
                     return (
                         <Flex justify='center' align='center' key={ann.id}>
                         <Card  align='center'  boxShadow='xl' width='80%' mt={10} mr={10} mb={30} className={styles.announcement} key={ann.id}>
                         <CardBody >
-                        <Heading  fontFamily={'Ma Shan Zheng'} as='h3' size='lg' color='#dedede' align='center'>{`${ann.attributes.title} `}</Heading>
+                        <Heading  fontFamily={'ZCOOL XiaoWei'} as='h3' size='lg' color='#dedede' align='center'>{`${ann.attributes.title} `}</Heading>
                         <br /> 
                         <Text color='#dedede' >{`${ann.attributes.description} `}</Text>
                                 <Text color='#dedede' >{` ${moment(ann.attributes.publishedAt).format('YYYY-MM-DD')} ${moment(ann.attributes.publishedAt).format('hh:mma')}`}</Text>
