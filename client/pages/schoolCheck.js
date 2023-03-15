@@ -22,7 +22,7 @@ function SchoolCheck({schools}) {
 export default SchoolCheck;
 
 export async function getServerSideProps(context) {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}schools`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}schools?pagination[pageSize]=200`, {
         method: 'GET',
         headers: {
             'Content-type': 'application/json'
