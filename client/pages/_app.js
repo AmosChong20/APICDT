@@ -6,8 +6,16 @@ import { SessionProvider } from 'next-auth/react'
 import { Analytics } from '@vercel/analytics/react';
 import Head from 'next/head'
 import { ThemeProvider,createTheme } from '@mui/material/styles';
+import Maintenance from './maintenance'
 
 function MyApp({ Component, pageProps }) {
+
+  const isMaintenance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE
+
+  if (isMaintenance) {
+    return <Maintenance/>
+  }
+
   return (
     <SessionProvider session={pageProps.session}>
       <ChakraProvider>
