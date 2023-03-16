@@ -36,14 +36,14 @@ function Starwars({ initialTime }) {
         }
     }, [])
 
-    useEffect(() => {
-        if (new Date() < new Date('2023-03-17T17:00:00')) {
-            setNotTimeYet(true)
-        }
-        else {
-            setNotTimeYet(false)
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (new Date() < new Date('2023-03-17T17:00:00')) {
+    //         setNotTimeYet(true)
+    //     }
+    //     else {
+    //         setNotTimeYet(false)
+    //     }
+    // }, [])
 
     if (!date) {
         return (
@@ -56,6 +56,12 @@ function Starwars({ initialTime }) {
             <Loading />
         )
     const email = session.user.email
+
+    if (!email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@demo.com$/)) {
+        return (
+            <Flex justify={'center'} mt={'70px'} ml={'-15px'} fontFamily={'ZCOOL XiaoWei'} fontSize={'26px'} h={'92vh'} color='black'>电子抽签系统暂未开放！</Flex>
+        )
+    }
 
     const handleAreaChange = async (e) => {
         console.log(e.target.value)
@@ -77,19 +83,23 @@ function Starwars({ initialTime }) {
         //     }, 500)
         //     return null
         // }
+        if (submitted) {
+            return null
+        }
+        setSubmitted(true)
         const endTime = date
         const startTime = new Date(selectedArea[0].startTime)
         const newDuration = endTime - startTime.getTime()
         console.log(newDuration)
         if (newDuration < 0) {
             setTimeAlert(true)
+            setSubmitted(false)
             setTimeout(() => {
                 setTimeAlert(false)
             }, 500)
             return null
         }
         const duration = newDuration / 1000
-        setSubmitted(true)
 
         try {
             const userResponse = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}schools?filters[accountEmail][$eq]=${email}`, {
@@ -113,10 +123,15 @@ function Starwars({ initialTime }) {
                 setRepeatAlert(true)
                 setTimeout(() => {
                     setRepeatAlert(false)
-                    router.push(`/drawnResults/${area}`)
                 }, 2000)
                 return null
             }
+            setShowSuccessAlert(true)
+            // setTimeout(() => {
+            //     setShowSuccessAlert(false)
+            //     router.push(`/drawnResults/${area}`)
+            // }, 2000)
+            router.push(`/drawnResults/${area}`)
             const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}drawn-results`, {
                 method: 'POST',
                 body: JSON.stringify({
@@ -137,12 +152,6 @@ function Starwars({ initialTime }) {
         catch (e) {
             console.log(e)
         }
-
-        setShowSuccessAlert(true)
-        setTimeout(() => {
-            setShowSuccessAlert(false)
-            router.push(`/drawnResults/${area}`)
-        }, 2000)
 
     }
 
