@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
 
   const isMaintenance = process.env.NEXT_PUBLIC_MAINTENANCE_MODE
 
-  if (isMaintenance) {
+  if (isMaintenance === "1") {
     return <Maintenance/>
   }
 
