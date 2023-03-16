@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:staging": "env-cmd -f .env.staging next build && next start"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.13",
@@ -23,6 +24,7 @@
     "@next/font": "^13.0.6",
     "@vercel/analytics": "^0.1.8",
     "antd": "^5.1.5",
+    "cross-env": "^7.0.3",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
     "framer-motion": "^7.6.19",
