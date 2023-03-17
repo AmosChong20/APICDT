@@ -29,7 +29,7 @@ function Starwars({ initialTime }) {
     const router = useRouter()
 
     useEffect(() => {
-        const timerForTime = setInterval(() => setDate(Date.now()), 999)
+        const timerForTime = setInterval(() => setDate(Date.now()), 1000)
         
         return () => {
             clearInterval(timerForTime)
