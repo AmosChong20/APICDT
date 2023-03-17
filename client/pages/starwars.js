@@ -86,11 +86,14 @@ function Starwars({ initialTime }) {
         if (submitted) {
             return null
         }
+        setTimeout(() => {
+            setSubmitted(false)
+        }, 5000)
         setSubmitted(true)
         const endTime = date
         const startTime = new Date(selectedArea[0].startTime)
         const newDuration = endTime - startTime.getTime()
-        console.log(newDuration)
+
         if (newDuration < 0) {
             setTimeAlert(true)
             setSubmitted(false)
@@ -108,7 +111,6 @@ function Starwars({ initialTime }) {
                     'Content-type': 'application/json'
                 }
             })
-            console.log(email)
             const userRes = await userResponse.json()
             const schoolName = userRes.data[0].attributes.schoolNameCN
             const schoolResponse = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}drawn-results?filters[schoolName][$eq]=${schoolName}`, {
@@ -118,7 +120,7 @@ function Starwars({ initialTime }) {
                 }
             })
             const schoolRes = await schoolResponse.json()
-            console.log(schoolRes)
+
             if (schoolRes.data.length > 0) {
                 setRepeatAlert(true)
                 setTimeout(() => {
@@ -207,7 +209,7 @@ function Starwars({ initialTime }) {
                                 <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={'54px'}>{`${selectedArea[0].area}`} </Heading>
                                 <Heading fontFamily={'ZCOOL XiaoWei'}>{`开始抽签时间：${moment(selectedArea[0].startTime).format("D/M/yyyy hh:mm a")}`} </Heading>
                                 <Heading fontFamily={'ZCOOL XiaoWei'}>{`结束抽签时间：${moment(selectedArea[0].endTime).format("D/M/yyyy hh:mm a")}`} </Heading>
-                                <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={138} mb={10}>{moment(date).format("hh:mm:ss a")}</Heading>
+                                {/* <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={138} mb={10}>{moment(date).format("hh:mm:ss a")}</Heading> */}
                                 <Button fontSize={'65px'} p={10} mb={20} onClick={handleSubmit}>提交</Button></Stack> </Stack> : <Stack align='center' mt={'100px'}>
                             <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={'100px'} mb={'50px'}>电子抽签系统</Heading>
                             {/* <Text fontFamily={'Montserrat'} fontWeight={800} fontSize={100} mb={10}><Time value={date} format="hh:mm:ss" /></Text> */}
