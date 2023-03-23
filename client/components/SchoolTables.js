@@ -21,11 +21,12 @@ import "@fontsource/zcool-xiaowei"
 function SchoolTables({ schools }) {
     const { Groups } = group1
     const router = useRouter()
-    const {data} = schools
+    const { data } = schools
+    const schoolFilter = data.filter((school, index) => data.findIndex(school2 => school.attributes.schoolNameCN == school2.attributes.schoolNameCN ) == index)
     const [group, setGroup] = useState([]);
     const handleSubmit = async (e) => {
         e.preventDefault()
-        for (const s of data ){
+        for (const s of schoolFilter ){
         const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}schools/${s.id}`, {
             method: 'PUT',
             headers: {
@@ -49,8 +50,8 @@ function SchoolTables({ schools }) {
         newArray[index] = e.target.value;
         setGroup(newArray)
     };
-    if (data) {
-        data.sort((schoolA, schoolB) => {
+    if (schoolFilter) {
+        schoolFilter.sort((schoolA, schoolB) => {
             const groupB = schoolB.attributes.group
             const groupA = schoolA.attributes.group
 
@@ -84,7 +85,7 @@ function SchoolTables({ schools }) {
                         </Tr>
                         </Thead>
                         <Tbody>
-                                {data.map(school => {
+                                {schoolFilter.map(school => {
                                     return (
                                         <Tr key={school.id}>
                                             <Td><Select size={'lg'} placeholder={school.attributes.group} onChange={updateState(school.id)}> 
