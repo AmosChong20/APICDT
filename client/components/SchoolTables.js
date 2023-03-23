@@ -87,10 +87,10 @@ function SchoolTables({ schools }) {
                         </Thead>
                         <Tbody>
                             {schoolFilter.map(school => {
-                                    email = school.attributes.leaderEmail
-                                    if (email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@demo.com$/)) {
-                                        return null;
-                                    }
+                                    // console.log(school.attributes.leaderEmail, school.attributes.leaderEmail.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@demo.com$/))
+                                    // if (email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@demo.com$/)) {
+                                    //     return null;
+                                    // }
                                     return (
                                         <Tr key={school.id}>
                                             <Td><Select size={'lg'} placeholder={school.attributes.group} onChange={updateState(school.id)}> 
