@@ -132,6 +132,7 @@ function Starwars({ initialTime }) {
             })
             const schoolRes = await schoolResponse.json()
 
+            router.push(`/drawnResults/${area}`)
             if (schoolRes.data.length > 0) {
                 setRepeatAlert(true)
                 setTimeout(() => {
@@ -159,7 +160,6 @@ function Starwars({ initialTime }) {
             })
             const res = await response.json()
             console.log(res)
-            router.push(`/drawnResults/${area}`)
             const { data } = res
         }
         catch (e) {
