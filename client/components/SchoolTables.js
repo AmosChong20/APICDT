@@ -19,11 +19,18 @@ import group1 from '../public/data/GroupsNew.json'
 import "@fontsource/zcool-xiaowei"
 
 function SchoolTables({ schools }) {
-    var email;
+    var email
     const { Groups } = group1
     const router = useRouter()
     const { data } = schools
-    const schoolFilter = data.filter((school, index) => data.findIndex(school2 => school.attributes.schoolNameCN == school2.attributes.schoolNameCN ) == index)
+    const emailFilter = data.filter(school => {
+        const email = school.attributes?.leaderEmail;
+        return email && !email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@demo.com$/)
+    })
+    console.log(emailFilter)
+    const schoolFilter = emailFilter.filter((school, index) => emailFilter.findIndex(school2 => school.attributes.schoolNameCN == school2.attributes.schoolNameCN ) == index)
+    console.log(schoolFilter)
+
     const [group, setGroup] = useState([]);
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -87,10 +94,6 @@ function SchoolTables({ schools }) {
                         </Thead>
                         <Tbody>
                             {schoolFilter.map(school => {
-                                    // console.log(school.attributes.leaderEmail, school.attributes.leaderEmail.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@demo.com$/))
-                                    // if (email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@demo.com$/)) {
-                                    //     return null;
-                                    // }
                                     return (
                                         <Tr key={school.id}>
                                             <Td><Select size={'lg'} placeholder={school.attributes.group} onChange={updateState(school.id)}> 
