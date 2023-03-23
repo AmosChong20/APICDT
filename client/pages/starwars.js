@@ -133,10 +133,10 @@ function Starwars({ initialTime }) {
             const schoolRes = await schoolResponse.json()
 
             if (schoolRes.data.length > 0) {
-                // setRepeatAlert(true)
-                // setTimeout(() => {
-                //     setRepeatAlert(false)
-                // }, 2000)
+                setRepeatAlert(true)
+                setTimeout(() => {
+                    setRepeatAlert(false)
+                }, 2000)
                 return null
             }
 

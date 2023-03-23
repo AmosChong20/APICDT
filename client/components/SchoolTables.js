@@ -19,6 +19,7 @@ import group1 from '../public/data/GroupsNew.json'
 import "@fontsource/zcool-xiaowei"
 
 function SchoolTables({ schools }) {
+    var email;
     const { Groups } = group1
     const router = useRouter()
     const { data } = schools
@@ -85,7 +86,11 @@ function SchoolTables({ schools }) {
                         </Tr>
                         </Thead>
                         <Tbody>
-                                {schoolFilter.map(school => {
+                            {schoolFilter.map(school => {
+                                    email = school.attributes.leaderEmail
+                                    if (email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@demo.com$/)) {
+                                        return null;
+                                    }
                                     return (
                                         <Tr key={school.id}>
                                             <Td><Select size={'lg'} placeholder={school.attributes.group} onChange={updateState(school.id)}> 
