@@ -29,9 +29,6 @@
     "leaderNameCN": {
       "type": "string"
     },
-    "leaderPhone": {
-      "type": "biginteger"
-    },
     "schoolNameCN": {
       "type": "string"
     },
@@ -56,6 +53,12 @@
     },
     "point": {
       "type": "integer"
+    },
+    "accountEmail": {
+      "type": "email"
+    },
+    "leaderPhone": {
+      "type": "string"
     }
   }
 }
