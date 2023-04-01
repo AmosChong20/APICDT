@@ -1,0 +1,67 @@
+.time {
+    font-size: 40px;
+    margin-top: 20px;
+}
+
+.countryName {
+    font-size: 75px;
+}
+
+.title {
+    margin-top: -100px;
+    font-size: 100px;
+    margin-bottom: 50px;
+}
+
+.submit {
+    font-size: 75px;
+    background-color: #e6e6e6;
+    color: black;
+    border-radius: 8px;
+    padding: 2px;
+    width: 250px;
+    margin-bottom: 20px;
+  }
+
+.submit:hover {
+    background-color: #d9d9d9;
+    color: black;
+}
+
+@media only screen and (max-width: 768px){
+    .time {
+        font-size: 25px;
+    }
+    
+    .countryName {
+        font-size: 50px;
+    }
+    
+    .title {
+        font-size: 70px;
+    }
+    
+    .submit {
+        font-size: 50px;
+        width: 150px;
+    }
+}
+
+@media only screen and (max-width: 468px){
+    .time {
+        font-size: 15px;
+    }
+    
+    .countryName {
+        font-size: 40px;
+    }
+    
+    .title {
+        font-size: 60px;
+    }
+    
+    .submit {
+        font-size: 40px;
+        width: 120px;
+    }
+}

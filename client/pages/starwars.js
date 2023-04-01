@@ -11,6 +11,7 @@ import moment from 'moment'
 import Loading from './loading'
 import Head from 'next/head'
 import starTime from '../public/data/starwars.json'
+import styles from '../styles/starwars.module.css'
 
 function Starwars({ initialTime }) {
     const { data: session } = useSession()
@@ -27,6 +28,8 @@ function Starwars({ initialTime }) {
     const [showRepeatAlert, setRepeatAlert] = useState(false)
     const [area, setArea] = useState()
     const [selectedArea, setSelectedArea] = useState()
+    const startTime = new Date('2023-04-01T16:43:00')
+    const endTime = new Date('2023-04-01T16:44:00')
     const router = useRouter()
 
     // useEffect(() => {
@@ -92,9 +95,7 @@ function Starwars({ initialTime }) {
             setSubmitted(false)
         }, 5000)
         const clickedTime = Date.now()
-        const startTime = new Date(selectedArea[0].startTime)
         const newDuration = clickedTime - startTime.getTime()
-        const endTime = new Date(selectedArea[0].endTime)
 
         if (clickedTime > endTime.getTime()) {
             setAfterTime(true)
@@ -183,7 +184,7 @@ function Starwars({ initialTime }) {
             {submitted && <Loading/> }
             {notTimeYet && <Flex justify={'center'} mt={'70px'} ml={'-15px'} fontFamily={'ZCOOL XiaoWei'} fontSize={'26px'} h={'92vh'} color='black'>电子抽签系统暂未开放！</Flex>}
             {!notTimeYet &&
-                <Flex fontFamily={'ZCOOL XiaoWei'} h={'92vh'} align='center' justify={'center'} flexDirection={'column'}>
+                <Flex fontFamily={'ZCOOL XiaoWei'} align='center' justify={'center'} flexDirection={'column'} minH={'92vh'} mb={'100px'}>
                     {selectedArea ?
                         <Stack align='center' justify={'center'}>
                             {showSuccessAlert ? <Flex justify={'center'} position='absolute' mt={'40px'} fontSize={'26px'}>
@@ -224,14 +225,19 @@ function Starwars({ initialTime }) {
                                 })}
                             </Select>
                             <Stack align={'center'} gap="15px">
-                                <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={'75px'}>{`${selectedArea[0].area}`} </Heading>
-                                <Heading fontFamily={'ZCOOL XiaoWei'} mt={'20px'}>{`开始抽签时间：${moment(selectedArea[0].startTime).format("D/M/yyyy hh:mm a")}`} </Heading>
-                                <Heading fontFamily={'ZCOOL XiaoWei'} mt={'20px'}>{`结束抽签时间：${moment(selectedArea[0].endTime).format("D/M/yyyy hh:mm a")}`} </Heading>
+                                <div className={styles.countryName}>{`${selectedArea[0].area}`} </div>
+                                <div className={styles.time}>{`开始抽签时间：${moment(startTime).format("D/M/yyyy hh:mm a")}`} </div>
+                                <div className={styles.time}>{`结束抽签时间：${moment(endTime).format("D/M/yyyy hh:mm a")}`} </div>
                                 {/* <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={138} mb={10}>{moment(date).format("hh:mm:ss a")}</Heading> */}
-                                <Button fontSize={'65px'} p={10} mb={20} onClick={handleSubmit}>提交</Button></Stack> </Stack> : <Stack align='center' mt={'100px'}>
-                            <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={'100px'} mb={'50px'}>电子抽签系统</Heading>
+                                {/* <Button fontSize={'65px'} p={10} mb={20} onClick={handleSubmit}>提交</Button> */}
+                                <button className={styles.submit} colorScheme={'whiteAlpha'} type='submit' onClick={handleSubmit}>提交</button>
+                            </Stack>
+                        </Stack> : <Stack align='center' mt={'100px'}>
+                            <div className={styles.title}>电子抽签系统</div>
+                            <div className={styles.time}>{`开始抽签时间：${moment(startTime).format("D/M/yyyy hh:mm a")}`} </div>
+                            <div className={styles.time}>{`结束抽签时间：${moment(endTime).format("D/M/yyyy hh:mm a")}`} </div>
                             {/* <Text fontFamily={'Montserrat'} fontWeight={800} fontSize={100} mb={10}><Time value={date} format="hh:mm:ss" /></Text> */}
-                            <Select borderColor={'Black'} w='150px' placeholder='地区' onChange={handleAreaChange} zIndex={0}>
+                            <Select borderColor={'Black'} w='150px' mt={'20px'} placeholder='请选择地区' onChange={handleAreaChange} zIndex={0}>
                                 {Starwars.map(country => {
                                     return (
                                         <option key={country.area}>{country.area}</option>
