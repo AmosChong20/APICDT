@@ -28,8 +28,8 @@ function Starwars({ initialTime }) {
     const [showRepeatAlert, setRepeatAlert] = useState(false)
     const [area, setArea] = useState()
     const [selectedArea, setSelectedArea] = useState()
-    const startTime = new Date('2023-04-01T16:43:00')
-    const endTime = new Date('2023-04-01T16:44:00')
+    // const startTime = new Date('2023-04-01T16:43:00')
+    // const endTime = new Date('2023-04-01T16:44:00')
     const router = useRouter()
 
     // useEffect(() => {
@@ -61,11 +61,11 @@ function Starwars({ initialTime }) {
         )
     const email = session.user.email
 
-    if (!email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@demo.com$/)) {
-        return (
-            <Flex justify={'center'} mt={'70px'} ml={'-15px'} fontFamily={'ZCOOL XiaoWei'} fontSize={'26px'} h={'92vh'} color='black'>电子抽签系统暂未开放！</Flex>
-        )
-    }
+    // if (!email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@demo.com$/)) {
+    //     return (
+    //         <Flex justify={'center'} mt={'70px'} ml={'-15px'} fontFamily={'ZCOOL XiaoWei'} fontSize={'26px'} h={'92vh'} color='black'>电子抽签系统暂未开放！</Flex>
+    //     )
+    // }
 
     const handleAreaChange = async (e) => {
         console.log(e.target.value)
@@ -95,6 +95,8 @@ function Starwars({ initialTime }) {
             setSubmitted(false)
         }, 5000)
         const clickedTime = Date.now()
+        const startTime = new Date(selectedArea[0].startTime)
+        const endTime = new Date(selectedArea[0].endTime)
         const newDuration = clickedTime - startTime.getTime()
 
         if (clickedTime > endTime.getTime()) {
@@ -115,7 +117,6 @@ function Starwars({ initialTime }) {
             return null
         }
         const duration = newDuration / 1000
-
         try {
             const userResponse = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}schools?filters[accountEmail][$eq]=${email}`, {
                 method: 'GET',
@@ -226,16 +227,14 @@ function Starwars({ initialTime }) {
                             </Select>
                             <Stack align={'center'} gap="15px">
                                 <div className={styles.countryName}>{`${selectedArea[0].area}`} </div>
-                                <div className={styles.time}>{`开始抽签时间：${moment(startTime).format("D/M/yyyy hh:mm a")}`} </div>
-                                <div className={styles.time}>{`结束抽签时间：${moment(endTime).format("D/M/yyyy hh:mm a")}`} </div>
+                                <div className={styles.time}>{`开始抽签时间：${moment(selectedArea[0].startTime).format("D/M/yyyy (UTCZ) hh:mm a")}`} </div>
+                                <div className={styles.time}>{`结束抽签时间：${moment(selectedArea[0].endTime).format("D/M/yyyy (UTCZ) hh:mm a")}`} </div>
                                 {/* <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={138} mb={10}>{moment(date).format("hh:mm:ss a")}</Heading> */}
                                 {/* <Button fontSize={'65px'} p={10} mb={20} onClick={handleSubmit}>提交</Button> */}
                                 <button className={styles.submit} colorScheme={'whiteAlpha'} type='submit' onClick={handleSubmit}>提交</button>
                             </Stack>
                         </Stack> : <Stack align='center' mt={'100px'}>
                             <div className={styles.title}>电子抽签系统</div>
-                            <div className={styles.time}>{`开始抽签时间：${moment(startTime).format("D/M/yyyy hh:mm a")}`} </div>
-                            <div className={styles.time}>{`结束抽签时间：${moment(endTime).format("D/M/yyyy hh:mm a")}`} </div>
                             {/* <Text fontFamily={'Montserrat'} fontWeight={800} fontSize={100} mb={10}><Time value={date} format="hh:mm:ss" /></Text> */}
                             <Select borderColor={'Black'} w='150px' mt={'20px'} placeholder='请选择地区' onChange={handleAreaChange} zIndex={0}>
                                 {Starwars.map(country => {

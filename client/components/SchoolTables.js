@@ -94,6 +94,7 @@ function SchoolTables({ schools }) {
                         </Thead>
                         <Tbody>
                             {schoolFilter.map(school => {
+                                    console.log(school.id, school.schoolNameCN)
                                     return (
                                         <Tr key={school.id}>
                                             <Td><Select size={'lg'} placeholder={school.attributes.group} onChange={updateState(school.id)}> 
