@@ -96,12 +96,17 @@ function Starwars({ initialTime }) {
         setTimeout(() => {
             setSubmitted(false)
         }, 5000)
-        const clickedTime = Date.now()
+        const clickedTime = new Date()
         const startTime = new Date(selectedArea[0].startTime)
         const endTime = new Date(selectedArea[0].endTime)
-        const newDuration = clickedTime - startTime.getTime()
 
-        if (clickedTime > endTime.getTime()) {
+        const offsetInMinutes = new Date().getTimezoneOffset();
+        const singaporeOffset = 8 * 60
+        const nowInSingapore = new Date(clickedTime.getTime() + (offsetInMinutes * 60 * 1000) + singaporeOffset * 60 * 1000)
+        
+        const newDuration = nowInSingapore.getTime() - startTime.getTime()
+
+        if (nowInSingapore.getTime() > endTime.getTime()) {
             setAfterTime(true)
             setSubmitted(false)
             setTimeout(() => {
@@ -109,7 +114,7 @@ function Starwars({ initialTime }) {
             }, 500)
             return null
         }
-
+        
         if (newDuration < 0) {
             setTimeAlert(true)
             setSubmitted(false)
