@@ -1,0 +1,58 @@
+.title {
+    font-size: 45px;
+}
+
+.wholeList {
+    margin-left: 50px;
+}
+
+.list {
+    font-size: 35px;
+}
+
+@media only screen and (max-width: 1024px){
+    .title {
+        font-size: 35px;
+    }
+
+    .wholeList {
+        margin-left: 30px;
+    }
+
+    .list {
+        font-size: 25px;
+    }
+    
+}
+
+@media only screen and (max-width: 768px){
+    
+    .title {
+        font-size: 20px;
+    }
+
+    .wholeList {
+        margin-left: 20px;
+    }
+
+    .list {
+        font-size: 15px;
+    }
+    
+
+}
+
+@media only screen and (max-width: 468px){
+    .title {
+        font-size: 15px;
+    }
+
+    .wholeList {
+        margin-left: 10px;
+    }
+
+    .list {
+        font-size: 10px;
+    }
+    
+}
