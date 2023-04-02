@@ -28,6 +28,8 @@ function Starwars({ initialTime }) {
     const [showRepeatAlert, setRepeatAlert] = useState(false)
     const [area, setArea] = useState()
     const [selectedArea, setSelectedArea] = useState()
+    const showStartTime = new Date(Starwars.filter((country) => country.area === "马来西亚")[0].startTime)
+    const showEndTime = new Date(Starwars.filter((country) => country.area === "马来西亚")[0].endTime)
     // const startTime = new Date('2023-04-01T16:43:00')
     // const endTime = new Date('2023-04-01T16:44:00')
     const router = useRouter()
@@ -227,8 +229,8 @@ function Starwars({ initialTime }) {
                             </Select>
                             <Stack align={'center'} gap="15px">
                                 <div className={styles.countryName}>{`${selectedArea[0].area}`} </div>
-                                <div className={styles.time}>{`开始抽签时间：${moment(selectedArea[0].startTime).format("D/M/yyyy (UTCZ) hh:mm a")}`} </div>
-                                <div className={styles.time}>{`结束抽签时间：${moment(selectedArea[0].endTime).format("D/M/yyyy (UTCZ) hh:mm a")}`} </div>
+                                <div className={styles.time}>{`开始抽签时间：${moment(showStartTime).format("D/M/yyyy (UTC+8) hh:mm a")}`} </div>
+                                <div className={styles.time}>{`结束抽签时间：${moment(showEndTime).format("D/M/yyyy (UTC+8) hh:mm a")}`} </div>
                                 {/* <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={138} mb={10}>{moment(date).format("hh:mm:ss a")}</Heading> */}
                                 {/* <Button fontSize={'65px'} p={10} mb={20} onClick={handleSubmit}>提交</Button> */}
                                 <button className={styles.submit} colorScheme={'whiteAlpha'} type='submit' onClick={handleSubmit}>提交</button>
