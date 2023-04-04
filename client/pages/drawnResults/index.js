@@ -8,16 +8,18 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 
 const fetcher = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}drawn-results`)
+    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}drawn-results?pagination[limit]=200`)
     const res = await response.json()
     const { data } = res
     return data
 }
 
-function DrawnResults() {
+function DrawnResults({ drawnResults }) {
     const { Starwars } = CountriesName
     const [notTimeYet, setNotTimeYet] = useState(true)
     const { data, error } = useSWR(`drawnResults`, fetcher)
+    // const res = drawnResults
+    // const drawnData = res.data
 
     useEffect(() => {
         if (new Date() < new Date('2023-03-17T17:00:00')) {
@@ -53,3 +55,20 @@ function DrawnResults() {
 }
 
 export default DrawnResults;
+
+// export async function getServerSideProps(context) {
+//     const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}drawn-results?pagination[limit]=100`, {
+//         method: 'GET',
+//         headers: {
+//             'Content-headers': 'application/json'
+//         }
+//     })
+
+//     const res = await response.json()
+
+//     return {
+//         props: {
+//             drawnResults: res
+//         }
+//     }
+// }

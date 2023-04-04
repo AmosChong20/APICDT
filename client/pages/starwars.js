@@ -114,7 +114,7 @@ function Starwars({ initialTime }) {
             }, 500)
             return null
         }
-        
+
         if (newDuration < 0) {
             setTimeAlert(true)
             setSubmitted(false)
