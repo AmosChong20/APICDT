@@ -96,7 +96,10 @@ function Starwars({ initialTime }) {
         setTimeout(() => {
             setSubmitted(false)
         }, 5000)
-        const clickedTime = new Date()
+
+        const res = await fetch(`/api/current-time`);
+        const { time } = await res.json()
+        const clickedTime = new Date(time)
         console.log(clickedTime)
         const startTime = new Date(selectedArea[0].startTime)
         const endTime = new Date(selectedArea[0].endTime)
