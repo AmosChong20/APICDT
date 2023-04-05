@@ -97,6 +97,7 @@ function Starwars({ initialTime }) {
             setSubmitted(false)
         }, 5000)
         const clickedTime = new Date()
+        console.log(clickedTime)
         const startTime = new Date(selectedArea[0].startTime)
         const endTime = new Date(selectedArea[0].endTime)
 
