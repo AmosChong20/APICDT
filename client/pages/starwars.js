@@ -12,6 +12,7 @@ import Loading from './loading'
 import Head from 'next/head'
 import starTime from '../public/data/starwars.json'
 import styles from '../styles/starwars.module.css'
+import momenttz from 'moment-timezone'
 
 function Starwars({ initialTime }) {
     const { data: session } = useSession()
@@ -96,20 +97,33 @@ function Starwars({ initialTime }) {
         setTimeout(() => {
             setSubmitted(false)
         }, 5000)
-
-        const res = await fetch(`/api/current-time`);
+        const clickedTime1 = new Date()
+        const res = await fetch(`/api/current-time`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({ time: clickedTime1 })
+        })
         const { time } = await res.json()
-        const clickedTime = new Date(time)
-        console.log(new Date())
-        console.log(clickedTime)
+        const formattedTime = momenttz.tz(time, 'Asia/Singapore')
+        const clickedTime = new Date()
+        console.log(time)
         const startTime = new Date(selectedArea[0].startTime)
+        console.log(startTime)
         const endTime = new Date(selectedArea[0].endTime)
+        return null;
 
         const offsetInMinutes = new Date().getTimezoneOffset();
         const singaporeOffset = 8 * 60
         const nowInSingapore = new Date(clickedTime.getTime() + (offsetInMinutes * 60 * 1000) + singaporeOffset * 60 * 1000)
         
         const newDuration = nowInSingapore.getTime() - startTime.getTime()
+        // const clickedMoment = moment(clickedTime)
+        // const startMoment = moment(startTime)
+        // const endMoment = moment(endTime)
+        // const newDuration = clickedTime - startTime
+        console.log(newDuration)
 
         if (nowInSingapore.getTime() > endTime.getTime()) {
             setAfterTime(true)
