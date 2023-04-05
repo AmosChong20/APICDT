@@ -18,6 +18,7 @@ function DrawnResults({ drawnResults }) {
     const { Starwars } = CountriesName
     const [notTimeYet, setNotTimeYet] = useState(true)
     const { data, error } = useSWR(`drawnResults`, fetcher)
+    console.log(data)
     // const res = drawnResults
     // const drawnData = res.data
 

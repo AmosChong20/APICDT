@@ -13,9 +13,11 @@ function DrawnResultsArea({ data, area }) {
             <div className={styles.title}>{`抽签结果（地区：${area}）`}</div>
             <ol className={styles.wholeList}>{schoolFilter.map((result) => {
                 const { attributes } = result
+                const timeUsed = attributes.timeUsed / 1000
+                const showTime = timeUsed.toFixed(3)
                 return (
                     <li className={styles.list} key={result.id}>
-                        {`${attributes.schoolName} :   ${attributes.timeUsed}秒`}
+                        {`${attributes.schoolName} :   ${showTime}秒`}
                     </li>
                 )
             })}</ol>

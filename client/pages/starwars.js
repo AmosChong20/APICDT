@@ -123,7 +123,7 @@ function Starwars({ initialTime }) {
             }, 500)
             return null
         }
-        const duration = newDuration / 1000
+        const duration = newDuration
         try {
             const userResponse = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}schools?filters[accountEmail][$eq]=${email}`, {
                 method: 'GET',
