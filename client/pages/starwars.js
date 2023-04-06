@@ -276,8 +276,8 @@ function Starwars({ initialTime }) {
                             </Select>
                             <Stack align={'center'} gap="15px">
                                 <div className={styles.countryName}>{`${selectedArea[0].area}`} </div>
-                                <div className={styles.time}>{`开始抽签时间：${moment(selectedArea[0].startTime?.toLocaleString('en-SG', { timeZone: 'Asia/Singapore' })).format("D/M/yyyy (UTC+8) hh:mm a")}`} </div>
-                                <div className={styles.time}>{`结束抽签时间：${moment(selectedArea[0].endTime?.toLocaleString('en-SG', { timeZone: 'Asia/Singapore' })).format("D/M/yyyy (UTC+8) hh:mm a")}`} </div>
+                                <div className={styles.time}>{`开始抽签时间：${moment(selectedArea[0].startTime).tz('Asia/Singapore').format("D/M/yyyy (UTC+8) hh:mm a")}`} </div>
+                                <div className={styles.time}>{`结束抽签时间：${moment(selectedArea[0].endTime).tz('Asia/Singapore').format("D/M/yyyy (UTC+8) hh:mm a")}`} </div>
                                 {/* <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={138} mb={10}>{moment(date).format("hh:mm:ss a")}</Heading> */}
                                 {/* <Button fontSize={'65px'} p={10} mb={20} onClick={handleSubmit}>提交</Button> */}
                                 <button className={styles.submit} colorScheme={'whiteAlpha'} disabled={clicked} type='submit' onClick={handleSubmit}>提交</button>
