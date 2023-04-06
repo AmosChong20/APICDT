@@ -20,6 +20,7 @@ function Starwars({ initialTime }) {
     const { Starwars } = starTime
 
     const [date, setDate] = useState(new Date())
+    const [clicked, setClicked] = useState(false)
     const [submitted, setSubmitted] = useState(false)
     const [notTimeYet, setNotTimeYet] = useState(false)
     const [afterTime, setAfterTime] = useState(false)
@@ -71,7 +72,6 @@ function Starwars({ initialTime }) {
     // }
 
     const handleAreaChange = async (e) => {
-        console.log(e.target.value)
         if (!e.target.value) {
             setSelectedArea(null)
             return null
@@ -82,7 +82,12 @@ function Starwars({ initialTime }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+        if (!clicked) {
+            setClicked(true)
+            setTimeout(() => {
+                setClicked(false)
+            }, 1500)
+        }
         // if (!area) {
         //     setShowFailAlert(true)
         //     setTimeout(() => {
@@ -124,7 +129,7 @@ function Starwars({ initialTime }) {
         // const endMoment = moment(endTime)
         // const newDuration = clickedTime - startTime
         // console.log(newDuration)
-        console.log(totalDuration, checkPast)
+        // console.log(totalDuration, checkPast)
         if (totalDuration < 0) {
             setTimeAlert(true)
             setSubmitted(false)
@@ -178,7 +183,6 @@ function Starwars({ initialTime }) {
             })
             const schoolRes = await schoolResponse.json()
 
-            router.push(`/drawnResults/${area}`)
             if (schoolRes.data.length > 0) {
                 setRepeatAlert(true)
                 setTimeout(() => {
@@ -186,11 +190,12 @@ function Starwars({ initialTime }) {
                 }, 2000)
                 return null
             }
-
+            router.push(`/drawnResults/${area}`)
             // setShowSuccessAlert(true)
             // setTimeout(() => {
             //     setShowSuccessAlert(false)
             // }, 2000)
+            // router.push(`/drawnResults/${area}`)
             const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}drawn-results`, {
                 method: 'POST',
                 body: JSON.stringify({
@@ -226,7 +231,7 @@ function Starwars({ initialTime }) {
                 <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            {submitted && <Loading/> }
+            {/* {submitted && <Loading/> } */}
             {notTimeYet && <Flex justify={'center'} mt={'70px'} ml={'-15px'} fontFamily={'ZCOOL XiaoWei'} fontSize={'26px'} h={'92vh'} color='black'>电子抽签系统暂未开放！</Flex>}
             {!notTimeYet &&
                 <Flex fontFamily={'ZCOOL XiaoWei'} align='center' justify={'center'} flexDirection={'column'} minH={'92vh'} mb={'100px'}>
@@ -275,7 +280,7 @@ function Starwars({ initialTime }) {
                                 <div className={styles.time}>{`结束抽签时间：${moment(selectedArea[0].endTime?.toLocaleString('en-SG', { timeZone: 'Asia/Singapore' })).format("D/M/yyyy (UTC+8) hh:mm a")}`} </div>
                                 {/* <Heading fontFamily={'ZCOOL XiaoWei'} fontSize={138} mb={10}>{moment(date).format("hh:mm:ss a")}</Heading> */}
                                 {/* <Button fontSize={'65px'} p={10} mb={20} onClick={handleSubmit}>提交</Button> */}
-                                <button className={styles.submit} colorScheme={'whiteAlpha'} type='submit' onClick={handleSubmit}>提交</button>
+                                <button className={styles.submit} colorScheme={'whiteAlpha'} disabled={clicked} type='submit' onClick={handleSubmit}>提交</button>
                             </Stack>
                         </Stack> : <Stack align='center' mt={'100px'}>
                             <div className={styles.title}>电子抽签系统</div>
