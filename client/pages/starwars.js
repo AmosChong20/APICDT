@@ -97,44 +97,35 @@ function Starwars({ initialTime }) {
         setTimeout(() => {
             setSubmitted(false)
         }, 5000)
-        const clickedTime1 = new Date()
         const res = await fetch(`/api/current-time`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify({ time: clickedTime1 })
+            body: JSON.stringify({
+                startTime: selectedArea[0].startTime,
+                endTime: selectedArea[0].endTime
+            })
         })
-        const { time } = await res.json()
-        const formattedTime = momenttz.tz(time, 'Asia/Singapore')
-        const clickedTime = new Date()
-        console.log(time)
-        const startTime = new Date(selectedArea[0].startTime)
-        console.log(startTime)
-        const endTime = new Date(selectedArea[0].endTime)
-        return null;
+        const { totalDuration, checkPast } = await res.json()
+        // const clickedTime = new Date()
+        // console.log(time)
+        // const startTime = new Date(selectedArea[0].startTime)
+        // console.log(startTime)
+        // const endTime = new Date(selectedArea[0].endTime)
 
-        const offsetInMinutes = new Date().getTimezoneOffset();
-        const singaporeOffset = 8 * 60
-        const nowInSingapore = new Date(clickedTime.getTime() + (offsetInMinutes * 60 * 1000) + singaporeOffset * 60 * 1000)
+        // const offsetInMinutes = new Date().getTimezoneOffset();
+        // const singaporeOffset = 8 * 60
+        // const nowInSingapore = new Date(clickedTime.getTime() + (offsetInMinutes * 60 * 1000) + singaporeOffset * 60 * 1000)
         
-        const newDuration = nowInSingapore.getTime() - startTime.getTime()
+        // const newDuration = nowInSingapore.getTime() - startTime.getTime()
         // const clickedMoment = moment(clickedTime)
         // const startMoment = moment(startTime)
         // const endMoment = moment(endTime)
         // const newDuration = clickedTime - startTime
-        console.log(newDuration)
-
-        if (nowInSingapore.getTime() > endTime.getTime()) {
-            setAfterTime(true)
-            setSubmitted(false)
-            setTimeout(() => {
-                setAfterTime(false)
-            }, 500)
-            return null
-        }
-
-        if (newDuration < 0) {
+        // console.log(newDuration)
+        console.log(totalDuration, checkPast)
+        if (totalDuration < 0) {
             setTimeAlert(true)
             setSubmitted(false)
             setTimeout(() => {
@@ -142,7 +133,34 @@ function Starwars({ initialTime }) {
             }, 500)
             return null
         }
-        const duration = newDuration
+
+        if (checkPast > 0) {
+            setAfterTime(true)
+            setSubmitted(false)
+            setTimeout(() => {
+                setAfterTime(false)
+            }, 500)
+            return null
+        }
+        
+        // if (nowInSingapore.getTime() > endTime.getTime()) {
+        //     setAfterTime(true)
+        //     setSubmitted(false)
+        //     setTimeout(() => {
+        //         setAfterTime(false)
+        //     }, 500)
+        //     return null
+        // }
+
+        // if (newDuration < 0) {
+        //     setTimeAlert(true)
+        //     setSubmitted(false)
+        //     setTimeout(() => {
+        //         setTimeAlert(false)
+        //     }, 500)
+        //     return null
+        // }
+        const duration = totalDuration
         try {
             const userResponse = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}schools?filters[accountEmail][$eq]=${email}`, {
                 method: 'GET',
