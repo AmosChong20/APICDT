@@ -13,19 +13,20 @@ const fetcher = async () => {
     return data
 }
 
-function Area() {
+function Area({ drawnResults }) {
     const router = useRouter()
     const { area } = router.query
-    const { data, error } = useSWR(`drawnResults/${area}`, fetcher)
+    // const { data, error } = useSWR(`drawnResults/${area}`, fetcher)
     const [load, setLoad] = useState(true)
+    const res = drawnResults
+    const drawnData = res?.entries
 
     setTimeout(() => {
         setLoad(false)
     }, 2000)
 
-    if (!data) 
+    if (!drawnData) 
         return <Loading/>
-    
     return ( 
         <>
             <Head>
@@ -35,9 +36,25 @@ function Area() {
         <link rel="icon" href="/favicon.ico" />
             </Head>
             {load && <Loading/>}
-            <DrawnResultsArea data={data} area={area} />
+            <DrawnResultsArea data={drawnData} area={area} />
             </>
      );
 }
 
 export default Area;
+
+export async function getServerSideProps(context) {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_STARWARS_URL}get-leaderboard`, {
+        method: 'GET',
+        headers: {
+            'Content-headers': 'application/json'
+        }
+    })
+
+    const res = await response.json()
+    return {
+        props: {
+            drawnResults: res
+        }
+    }
+}
