@@ -42,7 +42,7 @@ export const registerTime: RequestHandler<
 
   if (existingEntry) {
     throw new Error(
-      `您已经注册过${area}区的抽签了，时间为${
+      `您已经注册过${existingEntry.area}区的抽签了，时间为${
         existingEntry.timeUsed / 1000
       }秒。您可在抽签结果页面查看结果。`
     );
