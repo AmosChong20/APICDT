@@ -18,7 +18,7 @@ import AlertDialog from "../components/alert";
 import { useSession } from "next-auth/react";
 import countries from "../public/data/participatingCountry.json";
 import moment from "moment";
-import starTime from '../public/data/starwars.json'
+import starTime from "../public/data/starwars.json";
 import Loading from "./loading";
 import Head from "next/head";
 import Config from "../public/data/starwars.json";
@@ -65,9 +65,9 @@ function Starwars({ initialTime }) {
 
   const router = useRouter();
 
-  const { Starwars } = starTime
-    const [selectedArea, setSelectedArea] = useState();
-    const [selectedArea2, setSelectedArea2] = useState();
+  const { Starwars } = starTime;
+  const [selectedArea, setSelectedArea] = useState();
+  const [selectedArea2, setSelectedArea2] = useState();
   const [selectedAreaConfig, setSelectedAreaConfig] = useState();
   const [isWaitingForDebounce, setIsWaitingForDebounce] = useState(false);
   const [schoolName, setSchoolName] = useState();
@@ -77,7 +77,7 @@ function Starwars({ initialTime }) {
     (msg) => {
       setNotice(msg);
       setTimeout(() => {
-        if (notice === msg) setNotice("");
+        setNotice("");
       }, 3000);
     },
     [notice]
@@ -110,10 +110,10 @@ function Starwars({ initialTime }) {
     const area = e.target.value;
 
     if (!e.target.value) {
-        setSelectedArea(null);
+      setSelectedArea(null);
       return null;
     }
-      setSelectedArea(area);
+    setSelectedArea(area);
     // Fetch the area config
     fetchAreaConfig(area).then((res) => {
       console.log(res);
@@ -133,6 +133,16 @@ function Starwars({ initialTime }) {
         setIsWaitingForDebounce(false);
       }, 1500);
 
+      if (!selectedAreaConfig) {
+        setNoticeInner("地区未加载成功。");
+        return;
+      }
+
+      if (moment(moment(new Date())).isBefore(selectedAreaConfig.startTime)) {
+        setNoticeInner("抽签还未开始");
+        return;
+      }
+
       try {
         const res = await registerTime(selectedArea, schoolName);
         const { timeUsed } = res;
@@ -147,73 +157,84 @@ function Starwars({ initialTime }) {
         setNoticeInner(e);
       }
       const res = await fetch(`/api/current-time`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'Content-type': 'application/json'
+          "Content-type": "application/json",
         },
         body: JSON.stringify({
-            startTime: selectedAreaConfig.startTime,
-            endTime: selectedAreaConfig.endTime
-        })
-      })
-    
-    const { totalDuration, checkPast } = await res.json()
+          startTime: selectedAreaConfig.startTime,
+          endTime: selectedAreaConfig.endTime,
+        }),
+      });
 
-    if (totalDuration < 0) {
-        return null
-    }
+      const { totalDuration, checkPast } = await res.json();
 
-    if (checkPast > 0) {
-        return null
-    }
-          const duration = totalDuration
-    try {
-        const userResponse = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}schools?filters[accountEmail][$eq]=${email}`, {
-            method: 'GET',
+      if (totalDuration < 0) {
+        return null;
+      }
+
+      if (checkPast > 0) {
+        return null;
+      }
+      const duration = totalDuration;
+      try {
+        const userResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}schools?filters[accountEmail][$eq]=${email}`,
+          {
+            method: "GET",
             headers: {
-                'Content-type': 'application/json'
-            }
-        })
-        const userRes = await userResponse.json()
-        const schoolName = userRes.data[0].attributes.schoolNameCN
-        const schoolResponse = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}drawn-results?filters[schoolName][$eq]=${schoolName}`, {
-            method: 'GET',
+              "Content-type": "application/json",
+            },
+          }
+        );
+        const userRes = await userResponse.json();
+        const schoolName = userRes.data[0].attributes.schoolNameCN;
+        const schoolResponse = await fetch(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}drawn-results?filters[schoolName][$eq]=${schoolName}`,
+          {
+            method: "GET",
             headers: {
-                'Content-type': 'application/json'
-            }
-        })
-        const schoolRes = await schoolResponse.json()
+              "Content-type": "application/json",
+            },
+          }
+        );
+        const schoolRes = await schoolResponse.json();
 
         if (schoolRes.data.length > 0) {
-            return null
+          return null;
         }
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}drawn-results`, {
-            method: 'POST',
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}drawn-results`,
+          {
+            method: "POST",
             body: JSON.stringify({
-                data: {
-                    area: selectedArea,
-                    schoolName: schoolName,
-                    timeUsed: duration
-                }
+              data: {
+                area: selectedArea,
+                schoolName: schoolName,
+                timeUsed: duration,
+              },
             }),
             headers: {
-                'Content-type': 'application/json'
-            }
-        })
-        const res = await response.json()
-        console.log(res)
-        const { data } = res
-    }
-    catch (e) {
-        console.log(e)
-    }
+              "Content-type": "application/json",
+            },
+          }
+        );
+        const res = await response.json();
+        console.log(res);
+        const { data } = res;
+      } catch (e) {
+        console.log(e);
+      }
     },
-      [isWaitingForDebounce, router, schoolName, selectedArea, setNoticeInner]
-    
-
-    
-
+    [
+      isWaitingForDebounce,
+      router,
+      schoolName,
+      selectedArea,
+      selectedAreaConfig,
+      setNoticeInner,
+    ]
   );
 
   if (!session) return <Loading />;
