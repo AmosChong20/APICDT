@@ -23,12 +23,12 @@ import Head from "next/head";
 import Config from "../public/data/starwars.json";
 import styles from "../styles/starwars.module.css";
 
-const ROOT_URL = "https://starwars.yyjlincoln.app";
+const ROOT_URL = process.env.NEXT_PUBLIC_STARWARS_URL;
 
 const fetchAreaConfig = async (area) => {
   try {
     const r = await (
-      await fetch(`${ROOT_URL}/get-area-config?area=${area}`)
+      await fetch(`${ROOT_URL}get-area-config?area=${area}`)
     ).json();
     if (r.error) {
       throw r.error;
@@ -42,7 +42,7 @@ const fetchAreaConfig = async (area) => {
 
 const registerTime = async (area, schoolName) => {
   const r = await (
-    await fetch(`${ROOT_URL}/register-time`, {
+    await fetch(`${ROOT_URL}register-time`, {
       method: "POST",
       body: JSON.stringify({
         area,
@@ -65,7 +65,7 @@ function Starwars({ initialTime }) {
   const router = useRouter();
 
   const [selectedArea, setSelectedArea] = useState();
-  const [selectedAreaConfig, setSelectedAreaConfig] = useState<any>();
+  const [selectedAreaConfig, setSelectedAreaConfig] = useState();
   const [isWaitingForDebounce, setIsWaitingForDebounce] = useState(false);
   const [schoolName, setSchoolName] = useState();
   const [notice, setNotice] = useState("");
@@ -80,7 +80,7 @@ function Starwars({ initialTime }) {
     [notice]
   );
 
-  const email = session && session.user.email;
+  const email = session && session.user && session.user.email;
 
   useEffect(() => {
     if (!session) return;
