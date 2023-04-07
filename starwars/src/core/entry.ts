@@ -26,7 +26,7 @@ export const registerTime: RequestHandler<
 
   if (isBefore(now(), areaConfig.startTime)) {
     throw new Error(
-      `抽签未开始：${areaConfig.area}区域的抽签将于${areaConfig.endTime}开始。`
+      `抽签未开始：${areaConfig.area}区域的抽签将于${areaConfig.startTime}开始。`
     );
   }
 
