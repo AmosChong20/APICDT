@@ -26,13 +26,13 @@ export const registerTime: RequestHandler<
 
   if (isBefore(now(), areaConfig.startTime)) {
     throw new Error(
-      `The earliest time that you can register is ${areaConfig.startTime}. You're here too early.`
+      `抽签未开始：${areaConfig.area}区域的抽签将于${areaConfig.endTime}开始。`
     );
   }
 
   if (isBefore(areaConfig.endTime, now())) {
     throw new Error(
-      `The latest time that you can register is ${areaConfig.endTime}. You're here too late.`
+      `${areaConfig.area}区域的抽签已于${areaConfig.endTime}关闭。`
     );
   }
 
@@ -40,9 +40,17 @@ export const registerTime: RequestHandler<
 
   const existingEntry = await getEntryBySchoolName(schoolName);
 
-  if (existingEntry && existingEntry.timeUsed < timeUsed) {
-    return existingEntry;
+  if (existingEntry) {
+    throw new Error(
+      `您已经注册过${area}区的抽签了，时间为${
+        existingEntry.timeUsed / 1000
+      }秒。您可在抽签结果页面查看结果。`
+    );
   }
+
+  // if (existingEntry && existingEntry.timeUsed < timeUsed) {
+  //   return existingEntry;
+  // }
 
   const entry = await upsertEntry({
     area,
