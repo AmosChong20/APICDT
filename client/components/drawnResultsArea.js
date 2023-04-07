@@ -7,7 +7,6 @@ function DrawnResultsArea({ data, area }) {
     const areaFilter = data.filter(result => result.area == area)
     const areaSort = areaFilter.sort((a, b) => a.timeUsed - b.timeUsed)
     // const schoolFilter = areaSort.filter((school, index) => areaSort.findIndex(school2 => school.attributes.schoolName == school2.attributes.schoolName ) == index)
-    
     return ( 
         <Flex fontFamily={'ZCOOL XiaoWei'} mt={'20px'} ml={'20px'} minH='92vh' fontSize={'45px'} flexDirection={'column'}>
             <div className={styles.title}>{`抽签结果（地区：${area}）`}</div>
