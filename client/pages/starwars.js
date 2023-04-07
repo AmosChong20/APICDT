@@ -28,16 +28,16 @@ const ROOT_URL = process.env.NEXT_PUBLIC_STARWARS_URL;
 
 const fetchAreaConfig = async (area) => {
   try {
-    const r = await (
-      await fetch(`${ROOT_URL}get-area-config?area=${area}`)
-    ).json();
+    const c = await fetch(`${ROOT_URL}get-area-config?area=${area}`);
+    const r = await c.json();
     if (r.error) {
       throw r.error;
     }
 
     return r.areaConfig;
   } catch (e) {
-    throw e;
+    console.error(e);
+    return Config.Starwars.find((cf) => cf.area === area);
   }
 };
 
@@ -158,8 +158,9 @@ function Starwars({ initialTime }) {
           router.push("/drawnResults/" + selectedArea);
         }, 2000);
       } catch (e) {
-        setNoticeInner(e);
+        setNoticeInner(String(e));
       }
+
       const res = await fetch(`/api/current-time`, {
         method: "POST",
         headers: {
@@ -268,7 +269,7 @@ function Starwars({ initialTime }) {
           fontSize={"26px"}
           color="black"
         >
-          {notice}
+          {String(notice)}
         </Flex>
       )}
       {/* {!notTimeYet && ( */}
@@ -301,7 +302,7 @@ function Starwars({ initialTime }) {
                 <div className={styles.countryName}>
                   {`${selectedAreaConfig.area}`}{" "}
                 </div>
-                <div>您代表：{schoolName}</div>
+                <div>您代表：{String(schoolName)}</div>
                 <div className={styles.time}>
                   {`开始抽签时间：${moment(selectedAreaConfig.startTime)
                     .utcOffset(8)
