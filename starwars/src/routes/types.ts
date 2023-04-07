@@ -1,4 +1,4 @@
-export type RequestHandler<Req, Res> = (req: Req) => Res;
+export type RequestHandler<Req, Res> = (req: Req) => Promise<Res>;
 
 export interface RegisterTimeRequest {
   schoolName: string;
@@ -7,4 +7,6 @@ export interface RegisterTimeRequest {
 
 export interface RegisterTimeResponse {
   timeUsed: number;
+  schoolName: string;
+  area: string;
 }

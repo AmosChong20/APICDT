@@ -26,5 +26,13 @@ module.exports = {
   },
   externals: [nodeExternals()],
   watch: NODE_ENV === "development",
-  plugins: [],
+  plugins: [
+    new WebpackShellPlugin({
+      onBuildEnd: {
+        scripts: ["sh scripts/launch-dev.sh"],
+        blocking: false,
+        parallel: true,
+      },
+    }),
+  ],
 };

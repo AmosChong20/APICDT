@@ -2,29 +2,35 @@ import { Entry } from "./types";
 import { knex } from "../db";
 
 // CRUD operations for the `entry` table.
-export const getEntriesBySchoolName = async (
+export const getEntryBySchoolName = async (
   schoolName: string
-): Promise<Entry[]> => {
+): Promise<Entry> => {
   const results = await knex
     .select("*")
     .from("entry")
     .where({ schoolName: schoolName });
-  return results;
+  return results[0];
 };
 
-export const insertEntry = async (entry: Entry): Promise<number[]> => {
-  const ids = await knex.insert(entry).into("entry");
-  return ids;
+export const insertEntry = async (entry: Entry): Promise<Entry> => {
+  await knex.insert(entry).into("entry");
+  return await getEntryBySchoolName(entry.schoolName);
 };
 
-export const updateEntry = async (entry: Entry) => {
-  const ids = await knex("entry")
-    .update(entry)
-    .where({ schoolName: entry.schoolName });
-  return ids;
+export const updateEntry = async (entry: Entry): Promise<Entry> => {
+  await knex("entry").update(entry).where({ schoolName: entry.schoolName });
+  return await getEntryBySchoolName(entry.schoolName);
 };
 
 export const deleteEntryBySchoolName = async (schoolName: string) => {
-  const ids = await knex("entry").where("schoolName", schoolName).del();
-  return ids;
+  await knex("entry").where("schoolName", schoolName).del();
+};
+
+export const upsertEntry = async (entry: Entry) => {
+  const existingEntry = await getEntryBySchoolName(entry.schoolName);
+  if (!existingEntry) {
+    return insertEntry(entry);
+  } else {
+    return updateEntry({ ...existingEntry, ...entry });
+  }
 };
