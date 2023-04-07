@@ -122,7 +122,6 @@ function Starwars({ initialTime }) {
     async (e) => {
       e.preventDefault();
       if (isWaitingForDebounce) {
-        setNoticeInner("操作过快，请稍后再试");
         return;
       }
 
@@ -223,7 +222,13 @@ function Starwars({ initialTime }) {
                 <button
                   className={styles.submit}
                   // colorScheme={"whiteAlpha"}
-                  // disabled={clicked}
+                  style={
+                    isWaitingForDebounce
+                      ? {
+                          backgroundColor: "gray",
+                        }
+                      : {}
+                  }
                   type="submit"
                   onClick={handleSubmit}
                 >
