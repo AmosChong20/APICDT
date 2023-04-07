@@ -1,6 +1,6 @@
 import * as config from "./config.json";
 
-interface AreaConfig {
+export interface AreaConfig {
   area: string;
   startTime: Date;
   endTime: Date;

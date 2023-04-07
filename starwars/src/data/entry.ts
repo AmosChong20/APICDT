@@ -12,6 +12,10 @@ export const getEntryBySchoolName = async (
   return results[0];
 };
 
+export const getEntries = async (): Promise<Entry[]> => {
+  return await knex.select("*").from("entry");
+};
+
 export const insertEntry = async (entry: Entry): Promise<Entry> => {
   await knex.insert(entry).into("entry");
   return await getEntryBySchoolName(entry.schoolName);

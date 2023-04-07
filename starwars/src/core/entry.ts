@@ -1,6 +1,13 @@
 import { getAreaConfig } from "../config";
-import { getEntryBySchoolName, insertEntry, upsertEntry } from "../data/entry";
 import {
+  getEntries,
+  getEntryBySchoolName,
+  insertEntry,
+  upsertEntry,
+} from "../data/entry";
+import {
+  GetAreaConfigRequest,
+  GetAreaConfigResponse,
   RegisterTimeRequest,
   RegisterTimeResponse,
   RequestHandler,
@@ -44,4 +51,22 @@ export const registerTime: RequestHandler<
   });
 
   return entry;
+};
+
+export const getConfigForArea: RequestHandler<
+  GetAreaConfigRequest,
+  GetAreaConfigResponse
+> = async ({ area }) => {
+  const c = getAreaConfig(area);
+  if (!c) throw new Error(`No configuration can be found for area ${area}.`);
+
+  return {
+    areaConfig: c,
+  };
+};
+
+export const getLeaderboard = async () => {
+  return {
+    entries: await getEntries(),
+  };
 };
