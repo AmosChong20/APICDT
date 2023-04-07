@@ -138,7 +138,11 @@ function Starwars({ initialTime }) {
         return;
       }
 
-      if (moment(moment(new Date())).isBefore(selectedAreaConfig.startTime)) {
+      if (
+        moment(new Date()).isBefore(
+          moment(selectedAreaConfig.startTime).subtract(10, "minute")
+        )
+      ) {
         setNoticeInner("抽签还未开始");
         return;
       }
